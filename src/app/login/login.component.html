@@ -1,0 +1,9 @@
+<span>
+  <input #loginName  placeholder="User Name" class="form-control" (keyup.enter)="getUser(loginName.value)">
+  <button (click)="getUser(loginName.value); loginName.value=''">Login to Game
+  </button>
+<div > At least 3 letters for user name</div>
+
+</span>
+
+

@@ -1,0 +1,55 @@
+<!-- <div  style="text-align: center;">
+<button  style="height: 70px; width: 100px; " (click)="start();">START</button>
+</div> -->
+
+<div *ngIf="gameOver"> GAME OVER -- KING {{whoWonGame}} WON THE GAME!!!
+  <button (click)="playAgain()"> Play again with {{oponentName}}</button>
+</div>
+<div *ngIf="!gameOver" style="text-align: center;">
+  <div *ngIf="!isValid && gameReady" >
+  <input #guess placeholder="What is your guess" style="height: 40px;">
+<button [disabled]="isDisabled" style="height: 30px;" (click)="validate(guess.value); guess.value=''">Validate</button>
+</div>
+
+<div class="row">
+<div class="column" style="background-color: violet;">
+<h2>{{oponentName}}'s guesses</h2>
+<ul>
+  <li *ngFor="let number of numberGuessedForOponents | slice:1 " style="font-size: large;">
+    <div>{{number.num}}</div>{{number.posneg}}</li>
+</ul>
+</div>
+<div class="column" style="background-color:turquoise;">
+  <h2 *ngIf="!isValid && gameReady && !isDisabled" ><countdown #countdown [config]="{leftTime: 60}"></countdown></h2>
+  <h2>My Number for {{oponentName}}'s guess</h2>
+      <h2 *ngIf="isValid" ><input #setGuess placeholder="Enter a 5 digits number" style="height: 40px; font-size: large; text-align: center;" maxlength="5" >
+      <button  style="height: 30px;" (click)="setAnumber(setGuess.value); setGuess.value=''">Set and start game</button>
+      <h5 *ngIf="isMessageShow">{{messageForSetNum}}</h5>
+    </h2>
+
+    <h2 *ngIf="!isValid">{{setNumToOpponent}}</h2>
+   <div *ngIf="!isValid && gameReady">
+    <div>Number should be: <input class="guessBox" maxlength="1" >  <input class="guessBox" maxlength="1">  <input class="guessBox" maxlength="1">  <input class="guessBox" maxlength="1">   <input class="guessBox" maxlength="1"></div>
+    <div>Certain numbers: <input class="guessBox2" ></div>
+    <div>Possible numbers: <input class="guessBox2"  > </div>
+    <div>Impossible numbers: <input class="guessBox2" ></div>
+  </div>
+
+</div>
+  <div class="column" style="background-color:thistle;">
+    <h2>My guesses( {{loginName}} )</h2>
+    <ul>
+      <li *ngFor="let number of numberGuessedForMine" style="font-size: large;">
+        <div>{{number.num}}</div>{{number.posneg}}</li>
+    </ul>
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+
+

@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "game-number"
+    }
+  },
+  "defaultProject": "game-number",
+  "cli": {
+    "analytics": "6bde4e67-aa9d-448d-8e8d-aa2296bc3134"
+  }
 }

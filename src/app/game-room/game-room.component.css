@@ -1,0 +1,24 @@
+.column{
+  flex: 150%;
+  padding: 10px;
+  width: 400px;
+}
+.row{
+  display: flex;
+
+}
+
+.guessBox{
+width: 30px;
+height: 30px;
+text-align: center;
+}
+
+.guessBox2{
+width: 150px;
+height: 30px;
+margin-block-start: 50px ;
+
+}
+
+
