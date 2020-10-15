@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { loginInfo } from '../loginInfo';
+import { whichGame } from '../loginInfo';
+import { GameRoomOppComponent } from '../game-room-opp/game-room-opp.component';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  loginName;
+
+
+  constructor(private router: Router, private gameRoomOpp: GameRoomOppComponent) { }
 
   ngOnInit(): void {
+
+
+  }
+
+
+  isLoggedPC(){
+    if(loginInfo[0] != null ){
+      this.router.navigateByUrl("/room-pc");
+
+    }
+    else{
+      this.router.navigateByUrl("/login");
+      whichGame[0]="pc";
+
+    }
+
+  }
+
+  isLoggedOnline(){
+    if(loginInfo[0] != null ){
+      this.router.navigateByUrl("/room-opp/"+"12345");
+
+    }
+    else{
+      this.router.navigateByUrl("/login");
+      whichGame[0]="online";
+    }
+
   }
 
 }

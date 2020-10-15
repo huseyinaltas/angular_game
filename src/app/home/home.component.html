@@ -1,1 +1,13 @@
-<button> <a routerLink='/login'>New Game</a></button>
+<!-- <button> <a routerLink='/login'>old</a></button>
+<button> <a routerLink='/room-pc'>New Game against pc </a></button>
+<button> <a routerLink='/room-opp'>New Game against online user </a></button>
+<p></p> -->
+<div style="margin-top: 5%; margin-left: 28px;">
+<a routerLink='/scores' class="btn" style="Background: #f56666; margin-left: 20%;">All scores</a>
+<p></p>
+<a (click)="isLoggedPC()" routerLink='/room-pc' class="btn" id="button3" style="Background: #f58a8a; margin-right: 11%; margin-left: -11%; margin-top: -10%;">Play with PC</a>
+<a (click)="isLoggedOnline()" class="btn" style="cursor: pointer; margin-top: -10%; background: #faa1a1 ">Play online </a>
+<p></p>
+<a routerLink='/aboutUs' class="btn" style=" margin-left: 20%; margin-top: -10%; background: #eed1d1 ">How to play</a>
+
+</div>

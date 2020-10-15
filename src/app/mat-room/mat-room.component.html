@@ -1,0 +1,64 @@
+
+<div id="forOpp">
+My number for opp:
+</div>
+
+<div id="cover">
+    <div class="tb">
+      <div class="td"><input id="validationBox" type="text" placeholder="Enter 5 digits!" required maxlength="5" size="5"></div>
+      <div class="td" id="s-cover">
+        <button type="submit">
+          <div id="s-circle"></div>
+          <span></span>
+        </button>
+      </div>
+    </div>
+</div>
+<div id="borderForboard">
+<p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p>
+<p>Not possible: <input id="noteBoard" type="text" > </p>
+<p> Should be: 	&nbsp;	&nbsp;  <input id="noteBoard" type="text"> </p>
+<p> Certain:	&nbsp;	&nbsp;	&nbsp;	&nbsp;     <input id="noteBoard" type="text" > </p>
+
+
+</div>
+
+<div id="myGuesses">
+  <!-- #enddocregion basic-panel -->
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Self aware panel
+      </mat-panel-title>
+      <mat-panel-description>
+        Currently I am {{panelOpenState ? 'opened' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>I'm visible because I am open</p>
+  </mat-expansion-panel>
+
+  <!-- Copyright 2020 Google LLC. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->
+  </div>
+
+<div id="oppGuesses">
+  <!-- #enddocregion basic-panel -->
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Self aware panel
+      </mat-panel-title>
+      <mat-panel-description>
+        Currently I am {{panelOpenState ? 'opened' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>I'm visible because I am open</p>
+  </mat-expansion-panel>
+
+  <!-- Copyright 2020 Google LLC. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->
+  </div>

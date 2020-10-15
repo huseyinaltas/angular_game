@@ -1,0 +1,85 @@
+<div *ngIf="gameOver">
+  <span id="won">{{whoWonGame}} WON!!!! </span>
+  <button *ngIf="!newGameClicked" class="button" (click)="playAgain()"> Play again with {{oponentName}}</button>
+  <button *ngIf="newGameClicked" class="button2" (click)="playAgain()" [disabled]="newGameClicked"> Please Wait!</button>
+  </div>
+  <h2 *ngIf="isValid" ><input id="setBox" #setGuess placeholder="Enter a 5 digits number" maxlength="5" type="number" >
+    <button class="greatButton" style="height: 30px;" (click)="setAnumber(setGuess.value); setGuess.value=''">Set a number for game</button>
+    <h5 *ngIf="isMessageShow">{{messageForSetNum}}</h5>
+    </h2>
+
+  <div *ngIf="!gameOver && !isValid">
+<div id="forOpp">
+  My Number for {{oponentName}}: <span style="color: black;">{{setNumToOpponent}}</span>
+  <!-- <h2 *ngIf="!isValid && gameReady && !isDisabled" ><countdown #countdown [config]="{leftTime: 60}"></countdown></h2> -->
+  <h2 *ngIf="!isValid && gameReady && !isDisabled" ><countdown #countdown [config]="{leftTime: 60}"></countdown></h2>
+  </div>
+  <div id="cover">
+      <div class="tb">
+        <div class="td"><input id="validationBox" #guess type="number" placeholder="Enter 5 digits!" required maxlength="5" size="5"></div>
+        <div class="td" id="s-cover">
+          <button [disabled]="isDisabled" (click)="validate(guess.value); guess.value=''">
+            <div id="s-circle"></div>
+            <span></span>
+          </button>
+        </div>
+      </div>
+  </div>
+  <div id="borderForboard">
+  <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p>
+  <p class='boardP'> Not possible: <input class="noteBoard" type="number" > </p>
+  <p class='boardP'> Should be: 	&nbsp;	&nbsp;  <input class="noteBoard" type="number"> </p>
+  <p style="margin-left: 1.5%;" class='boardP'> Certain:	&nbsp;	&nbsp;	&nbsp;	&nbsp;  <input class="noteBoard" type="number" > </p>
+
+
+  </div>
+
+  <div id="myGuesses" style="margin-top: 2%;">
+    <!-- #enddocregion basic-panel -->
+    <mat-expansion-panel class='panelMine' (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span style="margin-top: 2.5%; color: #f25e43; font-weight: bolder;">    My Guesses: </span>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span style="color: black; margin-top: 2%; margin-left: -10%;" >  {{numberGuessedForMine[numberGuessedForMine.length-1].num}} </span>
+          <span id="guesses2" *ngIf="numberGuessedForMine.length !=1 && numberGuessedForMine[numberGuessedForMine.length-1].posneg !=null"> {{numberGuessedForMine[numberGuessedForMine.length-1].posneg}}</span>
+          {{panelOpenState ? '' : ''}}
+         </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ul *ngFor="let guess of numberGuessedForMine">
+        <li *ngIf="guess.num !=''"><span style="color: #f25e43;">{{guess.num}}</span>  <span  id="guesses">{{guess.posneg}}</span></li>
+       </ul>
+
+    </mat-expansion-panel>
+
+    <!-- Copyright 2020 Google LLC. All Rights Reserved.
+        Use of this source code is governed by an MIT-style license that
+        can be found in the LICENSE file at http://angular.io/license -->
+    </div>
+
+  <div id="oppGuesses" style="margin-top: 2%;">
+    <!-- #enddocregion basic-panel -->
+    <mat-expansion-panel class='panelOpp' (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span style="margin-top: 2.5%; color: black; font-weight: bolder;">{{oponentName}}'s Guesses: </span>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span style="color: black; margin-top: 2%; margin-left: -10%;" >  {{numberGuessedForOponents[numberGuessedForOponents.length-1].num}} </span>
+          <span id="guesses2" *ngIf="numberGuessedForOponents.length !=1 && numberGuessedForOponents[numberGuessedForOponents.length-1].posneg !=null"> {{numberGuessedForOponents[numberGuessedForOponents.length-1].posneg}}</span>
+          {{panelOpenState ? '' : ''}}
+         </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ul *ngFor="let guess of numberGuessedForOponents">
+        <li *ngIf="guess.num !=''"><span style="color: #f25e43;">{{guess.num}}</span>  <span  id="guesses">{{guess.posneg}}</span></li>
+       </ul>
+    </mat-expansion-panel>
+
+    <!-- Copyright 2020 Google LLC. All Rights Reserved.
+        Use of this source code is governed by an MIT-style license that
+        can be found in the LICENSE file at http://angular.io/license -->
+    </div>
+  </div>

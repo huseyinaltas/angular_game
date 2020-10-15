@@ -1,0 +1,61 @@
+<div *ngIf="gameOver">
+<span id="won">You WON! </span>
+<button class="button" routerLink='/home' >New Game</button>
+
+</div>
+
+<div *ngIf="!gameOver">
+<div id="all">
+  <div id="cover">
+      <div class="tb">
+        <div class="td">
+          <input id="validationBox" #guess type="number" placeholder="Enter 5 digits!" required maxlength="5" size="5" >
+        </div>
+        <div class="td" id="s-cover">
+          <button type="submit" (click)="validate(guess.value); guess.value=''">
+            <div id="s-circle"></div>
+            <span></span>
+          </button>
+        </div>
+      </div>
+  </div>
+  <div id="borderForboard">
+  <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p>
+  <p>Not possible: <input id="noteBoard" type="number" > </p>
+  <p> Should be: 	&nbsp;	&nbsp;  <input id="noteBoard" type="number"> </p>
+  <p> Certain:	&nbsp;	&nbsp;	&nbsp;	&nbsp;     <input id="noteBoard" type="number" > </p>
+  <p>{{setNumToMe}}</p>
+
+  </div>
+
+  <div id="myGuesses">
+    <!-- #enddocregion basic-panel -->
+    <mat-expansion-panel id="dropDown" (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false"
+                         [expanded]="panelOpenState">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         <span style="margin-top: 2.5%; color: #f25e43; font-weight: bolder;"> My last guess: </span>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span style="color: black; margin-top: 2%; margin-left: -10%;" >  {{numberGuessedFromMe[numberGuessedFromMe.length-1].num}} </span>
+          <span id="guesses2" *ngIf="numberGuessedFromMe.length !=1 && numberGuessedFromMe[numberGuessedFromMe.length-1].posneg !=null"> {{numberGuessedFromMe[numberGuessedFromMe.length-1].posneg}}</span>
+          {{panelOpenState ? '' : ''}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ul *ngFor="let guess of numberGuessedFromMe">
+       <li *ngIf="guess.num !=''"><span style="color: #f25e43;">{{guess.num}}</span>  <span  id="guesses">{{guess.posneg}}</span></li>
+      </ul>
+    </mat-expansion-panel>
+
+    <!-- Copyright 2020 Google LLC. All Rights Reserved.
+        Use of this source code is governed by an MIT-style license that
+        can be found in the LICENSE file at http://angular.io/license -->
+    </div>
+
+    <!-- Copyright 2020 Google LLC. All Rights Reserved.
+        Use of this source code is governed by an MIT-style license that
+        can be found in the LICENSE file at http://angular.io/license -->
+
+</div>
+</div>

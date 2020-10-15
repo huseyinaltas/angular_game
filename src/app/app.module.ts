@@ -10,6 +10,16 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CountdownModule } from 'ngx-countdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRoomComponent } from './mat-room/mat-room.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { GameRoomPcComponent } from './game-room-pc/game-room-pc.component';
+import { GameRoomOppComponent } from './game-room-opp/game-room-opp.component';
+import { ScoresComponent } from './scores/scores.component';
+import { ProfileComponent } from './profile/profile.component';
+import { WaitRoomComponent } from './wait-room/wait-room.component';
+
+
 
 
 
@@ -19,12 +29,21 @@ import { CountdownModule } from 'ngx-countdown';
     GameRoomComponent,
     AboutUsComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    MatRoomComponent,
+    GameRoomPcComponent,
+    GameRoomOppComponent,
+    ScoresComponent,
+    ProfileComponent,
+    WaitRoomComponent
+
   ],
+
   imports: [
     BrowserModule,
     CountdownModule,
     AppRoutingModule,
+    MatExpansionModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
@@ -32,9 +51,15 @@ import { CountdownModule } from 'ngx-countdown';
         { path: 'aboutUs', component: AboutUsComponent },
         { path: 'home', component: HomeComponent },
         { path: 'login', component: LoginComponent },
+        { path: 'room-pc', component: GameRoomPcComponent },
+        { path: 'room-opp/:room', component: GameRoomOppComponent },
+        { path: 'scores', component: ScoresComponent },
+        { path: 'profile', component: ProfileComponent },
+        { path: 'wait', component: WaitRoomComponent },
 
 
       ]),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
