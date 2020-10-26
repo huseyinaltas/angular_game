@@ -8,6 +8,7 @@ import { isNumber, isString } from 'util';
 import { LoginComponent } from '../login/login.component';
 import { GameService } from '../api.services/game.room.service';
 import { loginInfo } from '../loginInfo';
+import { room } from '../loginInfo';
 import { interval } from 'rxjs';
 import { MethodCall } from '@angular/compiler';
 import { CountdownModule } from 'ngx-countdown';
@@ -53,6 +54,8 @@ export class GameRoomOppComponent implements OnInit {
   callNumber=0;
   newGameClicked=false;
   href;
+  roomId;
+  getNames;
 
 
 
@@ -64,6 +67,7 @@ export class GameRoomOppComponent implements OnInit {
    ngOnInit() {
    this.href =  this.router.url;
    this.callNumber=0;
+   this.roomId = room[0];
 
     this.numberGuessedForMine[0]={num:"",posneg:""};
     this.numberGuessedForOponents[0]={num:"",posneg:""};
@@ -73,42 +77,56 @@ export class GameRoomOppComponent implements OnInit {
      this.loginName=loginInfo[0];
 
 
-     this.api.getRoomDetails().subscribe(
+     this.getNames = setInterval(()=>{
+     this.api.getRoomDetails(this.roomId).subscribe(
    data => {
-     if(this.loginName === 'huso25'){
+    if(this.href != this.router.url){
+      clearInterval(this.gameStarter);
+      clearInterval(this.passToOpponent);
+      clearInterval(this.getNames)
+     return clearTimeout(this.timeIsUp);
+    }
+     if(this.loginName == data['firstGamerId']  || this.loginName == data['secondGamerId']){
+     if(this.loginName == data['firstGamerId']){
        this.oponentName = data['secondGamerId'].toString();
 
      }
-     else if(this.loginName === 'ozge01'){
+     else if(this.loginName == data['secondGamerId']){
        this.oponentName=data['firstGamerId'].toString();
      }
-
+     clearInterval(this.getNames)
+    }
    }
  );
 
- this.gameStarter = setInterval(()=>{
+}, 1000);
 
+ this.gameStarter = setInterval(()=>{
+  this.api.getRoomDetails(this.roomId).subscribe(
+    data => {
   if(this.href != this.router.url){
     clearInterval(this.gameStarter);
     clearInterval(this.passToOpponent);
+    clearInterval(this.getNames)
    return clearTimeout(this.timeIsUp);
   }
+
 
   if (this.callNumber<60) {
 
 
 
-   if(this.loginName=="huso25"){
-     this.api.getGamerDetails("ozge01").subscribe(data => this.setNumToMe=data['setnumto'].toString());
+   if(this.loginName == data['firstGamerId']){
+     this.api.getGamerDetails(data['secondGamerId']).subscribe(data => this.setNumToMe=data['setnumto'].toString());
 
    }
 
-   else if(this.loginName=="ozge01"){
-     this.api.getGamerDetails("huso25").subscribe(data => this.setNumToMe=data['setnumto'].toString());
+   else if(this.loginName == data['secondGamerId']){
+     this.api.getGamerDetails(data['firstGamerId']).subscribe(data => this.setNumToMe=data['setnumto'].toString());
    }
 
-   this.api.getGamerDetails("ozge01").pipe(first()).subscribe(data => this.me=data['ready'].toString());
-   this.api.getGamerDetails("huso25").pipe(first()).subscribe(data => this.opp=data['ready'].toString());
+   this.api.getGamerDetails( data['secondGamerId']).pipe(first()).subscribe(data => this.me=data['ready'].toString());
+   this.api.getGamerDetails(data['firstGamerId']).pipe(first()).subscribe(data => this.opp=data['ready'].toString());
 
   //  console.log(this.me + "  "+this.opp);
 
@@ -127,23 +145,28 @@ export class GameRoomOppComponent implements OnInit {
   clearInterval(this.passToOpponent);
  return this.router.navigateByUrl("/home");
 }
-
+    })
 }, 1000);
 
 
 
 
    this.passToOpponent = setInterval(()=>{
-   this.api.getRoomDetails().pipe(first()).subscribe((data =>{
-        if(this.loginName=='huso25' && data['whoNext'].toString()=="1" && this.gameReady==true){
+    if( this.href !=  this.router.url){
+      clearInterval(this.passToOpponent);
+      clearInterval(this.gameStarter);
+      clearTimeout(this.timeIsUp);
+     }
+   this.api.getRoomDetails(this.roomId).pipe(first()).subscribe((data =>{
+        if(this.loginName == data['firstGamerId'] && data['whoNext'].toString()=="1" && this.gameReady==true){
           if( data['whoWon'].toString()=="1"){
             this.gameOver=true;
-            this.whoWonGame="huso25"
+            this.whoWonGame=data['firstGamerId']
          return  clearInterval(this.passToOpponent);
           }
            else if(data['whoWon'].toString()=="2"){
             this.gameOver=true;
-            this.whoWonGame="ozge01"
+            this.whoWonGame= data['secondGamerId']
           return clearInterval(this.passToOpponent);
           }
              this.isDisabled=false;
@@ -151,45 +174,45 @@ export class GameRoomOppComponent implements OnInit {
              this.numberGuessedForOponents.push({num:data['secondGamerGuess'].toString()});
            return clearInterval(this.passToOpponent);
          }
-        else if(this.loginName=='huso25' && data['whoNext'].toString()=="2"){
+        else if(this.loginName==data['firstGamerId'] && data['whoNext'].toString()=="2"){
           if( data['whoWon'].toString()=="1"){
             this.gameOver=true;
-            this.whoWonGame="huso25"
+            this.whoWonGame=data['firstGamerId']
          return  clearInterval(this.passToOpponent);
           }
            else if(data['whoWon'].toString()=="2"){
             this.gameOver=true;
-            this.whoWonGame="ozge01"
+            this.whoWonGame=data['secondGamerId']
           return clearInterval(this.passToOpponent);
           }
             this.isDisabled=true;
 
 
          }
-        if(this.loginName=='ozge01' && data['whoNext'].toString()=="1"){
+        if(this.loginName==data['secondGamerId'] && data['whoNext'].toString()=="1"){
           if( data['whoWon'].toString()=="1"){
             this.gameOver=true;
-            this.whoWonGame="huso25"
+            this.whoWonGame=data['firstGamerId']
          return  clearInterval(this.passToOpponent);
           }
            else if(data['whoWon'].toString()=="2"){
             this.gameOver=true;
-            this.whoWonGame="ozge01"
+            this.whoWonGame=data['secondGamerId']
           return clearInterval(this.passToOpponent);
           }
            this.isDisabled=true;
 
 
          }
-         else if(this.loginName=='ozge01' && data['whoNext'].toString()=="2" && this.gameReady==true){
+         else if(this.loginName==data['secondGamerId'] && data['whoNext'].toString()=="2" && this.gameReady==true){
           if( data['whoWon'].toString()=="1"){
             this.gameOver=true;
-            this.whoWonGame="huso25"
+            this.whoWonGame=data['firstGamerId']
          return  clearInterval(this.passToOpponent);
           }
            else if(data['whoWon'].toString()=="2"){
             this.gameOver=true;
-            this.whoWonGame="ozge01"
+            this.whoWonGame=data['secondGamerId']
           return clearInterval(this.passToOpponent);
           }
            this.isDisabled=false;
@@ -199,6 +222,7 @@ export class GameRoomOppComponent implements OnInit {
          }
 
        }))
+
 
 
  }, 1000);
@@ -229,53 +253,57 @@ export class GameRoomOppComponent implements OnInit {
  }
 
    if (guess) {
-    var data = this.validation.returnResult(this.setNumToMe, guess);
-     if(data.toString()=="+++++"){
+    this.api.getRoomDetails(this.roomId).pipe(first()).subscribe(data =>{
+    var validate = this.validation.returnResult(this.setNumToMe, guess);
+     if(validate.toString()=="+++++"){
        this.gameOver=true;
        this.whoWonGame=this.loginName;
-       if(this.loginName=="huso25"){
+       if(this.loginName== data['firstGamerId']){
        this.whoWonGamePOST="1";
-       this.scoreApi.getOneUserScore(this.loginName.toString()).subscribe(data => {
-        this.oldScore = data['score'];
+       this.scoreApi.getOneUserScore(this.loginName.toString()).subscribe(scoredata => {
+        this.oldScore = scoredata['score'].toString();
         this.scoreApi.updateAnUserScore(this.loginName, 100+Number(this.oldScore)).subscribe(data => data);
         });
       }
-       else if(this.loginName=="ozge01"){
+       else if(this.loginName== data['secondGamerId']){
        this.whoWonGamePOST="2";
-       this.scoreApi.getOneUserScore(this.loginName.toString()).subscribe(data => {
-        this.oldScore = data['score'];
+       this.scoreApi.getOneUserScore(this.loginName.toString()).subscribe(scoredata => {
+        this.oldScore = scoredata['score'].toString();
         this.scoreApi.updateAnUserScore(this.loginName, 100+Number(this.oldScore)).subscribe(data => data);
         });
       }
      }
      var lastIndexOfOppGuessed= this.numberGuessedForOponents[this.numberGuessedForOponents.length-1].num;
-     if(this.loginName=="huso25"){
+     if(this.loginName== data['firstGamerId']){
        console.log("Hello");
        this.ngOnInit();
-       if(guess.length!=5 || data.toString().length>5){
+       if(guess.length!=5 || validate.toString().length>5){
          this.numberGuessedForMine.push({num:"Enter 5 unique digits!", posneg:null});
-         return this.api.updateRoom("12345","huso25", "ozge01", this.setNumToMe,this.setNumToOpponent,"Not valid!",lastIndexOfOppGuessed,"2",this.whoWonGamePOST).subscribe(()=>data);
+         return this.api.updateRoom(data['roomId'],data['firstGamerId'], data['secondGamerId'], this.setNumToMe,this.setNumToOpponent,"Not valid!",lastIndexOfOppGuessed,"2",this.whoWonGamePOST, "0").subscribe((data)=>data);
        }
      else if(guess.length==5) {
-       this.numberGuessedForMine.push({num:guess, posneg:data.toString()});
-       return this.api.updateRoom("12345","huso25", "ozge01", this.setNumToMe,this.setNumToOpponent,guess,lastIndexOfOppGuessed,"2",this.whoWonGamePOST).subscribe(()=>data);
+       this.numberGuessedForMine.push({num:guess, posneg:validate.toString()});
+       return this.api.updateRoom(data['roomId'],data['firstGamerId'], data['secondGamerId'], this.setNumToMe,this.setNumToOpponent,guess,lastIndexOfOppGuessed,"2",this.whoWonGamePOST, "0").subscribe((data)=>data);
      }
    }
-     else if(this.loginName=="ozge01"){
+     else if(this.loginName== data['secondGamerId']){
        console.log("Mello");
        this.ngOnInit();
-       if(guess.length!=5 || data.toString().length>5){
+       if(guess.length!=5 || validate.toString().length>5){
          this.numberGuessedForMine.push({num:"Enter 5 unique digits!", posneg:null});
-         return this.api.updateRoom("12345","huso25", "ozge01", this.setNumToOpponent,this.setNumToMe,lastIndexOfOppGuessed,"Not valid!","1",this.whoWonGamePOST).subscribe(()=>data);
+         return this.api.updateRoom(data['roomId'],data['firstGamerId'], data['secondGamerId'], this.setNumToOpponent,this.setNumToMe,lastIndexOfOppGuessed,"Not valid!","1",this.whoWonGamePOST, "0").subscribe((validate)=>data);
        }
        else if(guess.length==5) {
-         this.numberGuessedForMine.push({num:guess, posneg:data.toString()});
-         return this.api.updateRoom("12345","huso25", "ozge01", this.setNumToOpponent,this.setNumToMe,lastIndexOfOppGuessed,guess,"1",this.whoWonGamePOST).subscribe(()=>data);
+         this.numberGuessedForMine.push({num:guess, posneg:validate.toString()});
+         return this.api.updateRoom(data['roomId'],data['firstGamerId'], data['secondGamerId'], this.setNumToOpponent,this.setNumToMe,lastIndexOfOppGuessed,guess,"1",this.whoWonGamePOST, "0").subscribe((validate)=>data);
 
        }
  }
 
-   }
+})
+
+}
+
   }
 
    }
@@ -315,9 +343,9 @@ export class GameRoomOppComponent implements OnInit {
      playAgain(){
       this.newGameClicked=true;
      var timeOut =  setTimeout(()=>{
-
+      this.api.getRoomDetails(this.roomId).pipe(first()).subscribe(data =>{
        this.api.updateGamer(this.loginName,"12345","12345","0").subscribe((data)=>data);
-       this.api.updateRoom("12345","huso25", "ozge01", "12345","12345","12345","12345","1","3").subscribe((data)=>data);
+       this.api.updateRoom(data['roomId'], data['firstGamerId'], data['secondGamerId'], "12345","12345","12345","12345","1","3", "0").subscribe((data)=>data);
        // this.router.navigateByUrl("/gameRoom/"+"12345");
        this.numberGuessedForMine = [];
        this.numberGuessedForOponents = [];
@@ -339,6 +367,8 @@ export class GameRoomOppComponent implements OnInit {
        clearTimeout(this.timeIsUp);
        this.ngOnInit();
 
+      })
+
       },2000)
 
      }
@@ -353,22 +383,24 @@ export class GameRoomOppComponent implements OnInit {
    this.isDisabled=true;
 
    if (guess) {
+    this.api.getRoomDetails(this.roomId).pipe(first()).subscribe(data =>{
      this.numberGuessedForMine.push({num:guess, posneg:""});
      var lastIndexOfOppGuessed= this.numberGuessedForOponents[this.numberGuessedForOponents.length-1].num;
-     if(this.loginName=="huso25"){
+     if(this.loginName==data['firstGamerId']){
       //  console.log("Hello");
-       this.api.updateRoom("12345","huso25", "ozge01", this.setNumToMe,this.setNumToOpponent,guess,lastIndexOfOppGuessed,"2","3").subscribe((data)=>data);
+       this.api.updateRoom(data['roomId'], data['firstGamerId'], data['secondGamerId'], this.setNumToMe,this.setNumToOpponent,guess,lastIndexOfOppGuessed,"2","3", "0").subscribe((data)=>data);
        return this.ngOnInit();
 
 
    }
-     else if(this.loginName=="ozge01"){
+     else if(this.loginName==data['secondGamerId']){
       //  console.log("Mello");
-       this.api.updateRoom("12345","huso25", "ozge01", this.setNumToOpponent,this.setNumToMe,lastIndexOfOppGuessed,guess,"1","3").subscribe((data)=>data);
+       this.api.updateRoom(data['roomId'], data['firstGamerId'], data['secondGamerId'], this.setNumToOpponent,this.setNumToMe,lastIndexOfOppGuessed,guess,"1","3", "0").subscribe((data)=>data);
       return this.ngOnInit();
 
 
  }
+})
      }
 }
 

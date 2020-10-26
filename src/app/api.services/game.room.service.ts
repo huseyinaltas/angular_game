@@ -27,13 +27,13 @@ export class GameService {
 
 
 
-  getRoomDetails() {
-    return this.http.request('GET', 'http://192.168.86.98:8080/gameroom/12345', {headers:this.headers,responseType:'json'});
+  getRoomDetails(roomId) {
+    return this.http.request('GET', 'http://192.168.86.98:8080/gameroom/'+roomId, {headers:this.headers,responseType:'json'});
   }
 
 
-  updateRoom(roomId,firstGamerId,secondGamerId,firstGamerNumberSetNum,secondGamerNumberSetNum,firstGamerGuess,secondGamerGuess, 
-  whoNext, whoWon){
+  updateRoom(roomId,firstGamerId,secondGamerId,firstGamerNumberSetNum,secondGamerNumberSetNum,firstGamerGuess,secondGamerGuess,
+  whoNext, whoWon, friend){
    var bodyl = {
       roomId : roomId ,
   firstGamerId : firstGamerId,
@@ -43,9 +43,10 @@ export class GameService {
       firstGamerGuess: firstGamerGuess,
       secondGamerGuess: secondGamerGuess,
       whoNext:whoNext,
-      whoWon:whoWon
+      whoWon:whoWon,
+      friend:friend
   }
-    return  this.http.request('PUT', 'http://192.168.86.98:8080/gameroom/12345', { headers:this.headers, body:bodyl});
+    return  this.http.request('PUT', 'http://192.168.86.98:8080/gameroom/'+roomId, { headers:this.headers, body:bodyl});
   }
 
   validateNum(setNumToMe, guess){
@@ -73,6 +74,64 @@ export class GameService {
   getGamerDetails(gamerid:string) {
     return this.http.request('GET', 'http://192.168.86.98:8080/gamer/'+gamerid, {headers:this.headers,responseType:'json'});
   }
+
+
+
+  getAvailableRooms() {
+    return this.http.request('GET', 'http://192.168.86.98:8080/available/', {headers:this.headers,responseType:'json'});
+  }
+
+
+  createRoom(roomId,firstGamerId,secondGamerId,firstGamerNumberSetNum,secondGamerNumberSetNum,firstGamerGuess,secondGamerGuess,
+    whoNext, whoWon, friend){
+     var bodyl = {
+        roomId : roomId ,
+    firstGamerId : firstGamerId,
+    secondGamerId : secondGamerId,
+    firstGamerNumberSetNum : firstGamerNumberSetNum,
+    secondGamerNumberSetNum : secondGamerNumberSetNum,
+        firstGamerGuess: firstGamerGuess,
+        secondGamerGuess: secondGamerGuess,
+        whoNext:whoNext,
+        whoWon:whoWon,
+        friend:friend
+    }
+      return  this.http.request('POST', 'http://192.168.86.98:8080/gameroom/', {responseType:'text', headers:this.headers, body:bodyl});
+    }
+
+
+    createId(length){
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+
+    }
+
+    createIdFriend(length){
+        var result           = '';
+        var characters       = '0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+
+    }
+
+    deleteARoom(roomId) {
+      return this.http.request('DELETE', 'http://192.168.86.98:8080/gameroom/'+roomId, {responseType:'text', headers:this.headers,});
+    }
+
+
+    delete5Minutes() {
+      return this.http.request('DELETE', 'http://192.168.86.98:8080/gameroom/deleteFiveMinutes/', {responseType:'text', headers:this.headers,});
+    }
+
+
 
 
 }

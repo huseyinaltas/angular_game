@@ -315,8 +315,8 @@
     <img src="/assets/image.png"  width=100% height=100px>
     </div> -->
 <div  class="toolbar" role="banner">
-  <span style="margin-left: 1%;"> <a routerLink='/home'> Home Page</a> </span>
-  <span> <a routerLink='/aboutUs'> How to play</a> </span>
+  <span style="margin-left: 1%;"> <a routerLink='/home'> Home </a> </span>
+  <span> <a routerLink='/aboutUs'> About</a> </span>
   <span > <a routerLink='/scores'> Scores</a> </span>
   <span *ngIf="gamerName ==null"> <a routerLink='/login'> Login</a> </span>
   <span (click)="logout()" *ngIf="gamerName !=null"> <a routerLink='/home'> Logout</a> </span>

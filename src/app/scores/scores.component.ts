@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ScoreService } from '../api.services/gamer.score.service';
+import {room} from '../loginInfo'
 
 @Component({
   selector: 'app-scores',
@@ -20,6 +21,8 @@ export class ScoresComponent implements OnInit {
     // this.allScores.push(this.api.getAllScores());
     this.api.getAllScores().subscribe(data => this.allScores=data
       )
+      console.log(room[0]);
+
 
 
   }

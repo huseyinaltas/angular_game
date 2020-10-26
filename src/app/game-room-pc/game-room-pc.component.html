@@ -9,7 +9,7 @@
   <div id="cover">
       <div class="tb">
         <div class="td">
-          <input id="validationBox" #guess type="number" placeholder="Enter 5 digits!" required maxlength="5" size="5" >
+          <input id="validationBox" #guess type="tel" placeholder="Enter 5 digits!" required maxlength="5" size="5" >
         </div>
         <div class="td" id="s-cover">
           <button type="submit" (click)="validate(guess.value); guess.value=''">
@@ -21,10 +21,10 @@
   </div>
   <div id="borderForboard">
   <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p>
-  <p>Not possible: <input id="noteBoard" type="number" > </p>
-  <p> Should be: 	&nbsp;	&nbsp;  <input id="noteBoard" type="number"> </p>
-  <p> Certain:	&nbsp;	&nbsp;	&nbsp;	&nbsp;     <input id="noteBoard" type="number" > </p>
-  <p>{{setNumToMe}}</p>
+  <p>Not possible: <input id="noteBoard" type="tel"  > </p>
+  <p> Should be: 	&nbsp;	&nbsp;  <input id="noteBoard" type="tel"> </p>
+  <p> Certain:	&nbsp;	&nbsp;	&nbsp;	&nbsp;    <input id="noteBoard" type="tel" > </p>
+  <!-- <p>{{setNumToMe}}</p> -->
 
   </div>
 

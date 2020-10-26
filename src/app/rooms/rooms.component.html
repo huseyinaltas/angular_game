@@ -1,0 +1,81 @@
+
+<div align="center" style="margin-top: 30%;" *ngIf="isRoomCreated">
+     <h2><span>-Your friend Game ID-</span></h2>
+     <h1> {{this.roomId}}</h1>
+     <!-- <h2 style="font-weight: bolder;"><span> Please wait for your friend!</span></h2> -->
+     <div style="margin-top: -30%; margin-right: 10%;" class="content">
+      <div class="loading">
+    <p style="margin-top: 70%; padding-top: 70%; width: 150%;">Please wait for your friend...</p>
+         <span></span>
+      </div>
+    </div>
+</div>
+
+
+<div *ngIf="!isRoomCreated">
+<div *ngIf="!clickedJoin">
+<div class="button_cont" align="center">
+  <a class="example_b"  style="background-color: #f56666; font-size:25px;     text-shadow: 0px 0px 6px rgba(255, 255, 255, 1); " (click)="createGame()" target="_blank" rel="nofollow noopener">
+    Create A Game
+  </a>
+</div>
+<p></p>
+<!-- <h3 align="center" style="color: black; background-color: #f0b3b3;" >OR</h3> -->
+<p></p>
+<div class="button_cont" align="center">
+  <a class="example_b"  style="background-color: #f56666; font-size:25px;" (click)="clickedJoin=true;" target="_blank" rel="nofollow noopener">
+    Join A Game
+  </a>
+</div>
+</div>
+<div *ngIf="clickedJoin">
+<div>
+  <div align="center">
+  <input  #loginName type="tel" placeholder="Game ID" class="form-control" (keyup.enter)="getGame(loginName.value)">
+</div>
+  <p></p>
+<div align="center">
+  <button class="example_b" style="background-color: #f56666; outline:0; font-size:25px;     text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);" (click)="getGame(loginName.value);  loginName.value=''">Join
+  </button>
+</div>
+</div>
+<p></p>
+  <div style="color: tomato;" *ngIf="noGame">Please enter correct Game ID.</div>
+
+</div>
+</div>
+
+
+
+<!-- <h1 style="text-align: center;">Rooms</h1>
+<p></p>
+<div class="button_cont" align="center" >
+  <a class="example_b" style="background-color: #f09e9e;" (click)="log()" target="_blank" rel="nofollow noopener">
+    Rose
+  </a>
+</div>
+<p></p>
+<div class="button_cont" align="center">
+  <a class="example_b" style="background-color: #f09191;" href="add-website-here" target="_blank" rel="nofollow noopener">
+    Lilly
+  </a>
+</div>
+<p></p>
+<div class="button_cont" align="center">
+  <a class="example_b"  style="background-color: #f57f7f;" href="add-website-here" target="_blank" rel="nofollow noopener">
+    Violet
+  </a>
+</div>
+<p></p>
+<div class="button_cont" align="center">
+  <a class="example_b" style="background-color: #f87676;" href="add-website-here" target="_blank" rel="nofollow noopener">
+    Lavender
+  </a>
+</div>
+<p></p>
+<div class="button_cont" align="center">
+  <a class="example_b"  style="background-color: #f56666;" href="add-website-here" target="_blank" rel="nofollow noopener">
+    Sunflowers
+  </a>
+</div>
+ -->

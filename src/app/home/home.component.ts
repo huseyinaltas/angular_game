@@ -34,10 +34,22 @@ export class HomeComponent implements OnInit {
     }
 
   }
+  isLoggedRooms(){
+    if(loginInfo[0] != null ){
+      this.router.navigateByUrl("/rooms");
+
+    }
+    else{
+      this.router.navigateByUrl("/login");
+      whichGame[0]="rooms";
+
+    }
+
+  }
 
   isLoggedOnline(){
     if(loginInfo[0] != null ){
-      this.router.navigateByUrl("/room-opp/"+"12345");
+      this.router.navigateByUrl("/wait");
 
     }
     else{

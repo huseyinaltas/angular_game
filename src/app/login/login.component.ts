@@ -36,7 +36,13 @@ if(this.userReady==true && login.length>2){
     this.appcomp.ngOnInit();
   }
   else if(whichGame[0]=="online"){
-    this.router.navigateByUrl("/room-opp/12345");
+    this.router.navigateByUrl("/wait");
+      loginInfo[0]=login;
+    this.appcomp.ngOnInit();
+
+  }
+  else if(whichGame[0]=="rooms"){
+    this.router.navigateByUrl("/rooms");
       loginInfo[0]=login;
     this.appcomp.ngOnInit();
 
