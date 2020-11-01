@@ -1,6 +1,6 @@
 {
   "/example": {
-    "target": "http://localhost:8080",
-    "secure": true
+    "target": "http://localhost:8081",
+    "secure": false
   }
 }
