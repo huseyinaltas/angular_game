@@ -7,8 +7,15 @@
     <button class="greatButton" style="height: 30px;" (click)="setAnumber(setGuess.value); setGuess.value=''">Set a number for game</button>
     <h5 *ngIf="isMessageShow">{{messageForSetNum}}</h5>
     </h2>
-
-  <div *ngIf="!gameOver && !isValid">
+    <div *ngIf="!gameReady && !isValid">
+    <div class="content">
+      <div class="loading">
+    <p style="margin-top: 70%; padding-top: 70%;">Getting started...</p>
+         <span></span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!gameOver && !isValid && gameReady">
 <div id="forOpp">
   My Number for {{oponentName}}: <span style="color: black;">{{setNumToOpponent}}</span>
   <!-- <h2 *ngIf="!isValid && gameReady && !isDisabled" ><countdown #countdown [config]="{leftTime: 60}"></countdown></h2> -->
@@ -16,7 +23,9 @@
   </div>
   <div id="cover">
       <div class="tb">
-        <div class="td"><input id="validationBox" #guess type="number" placeholder="Enter 5 digits!" required maxlength="5" size="5"></div>
+        <div class="td">
+          <input id="validationBox" #guess type="tel" placeholder="Enter 5 digits!" required maxlength="5" size="5" (keyup.enter)="validate(guess.value);guess.value=''">
+        </div>
         <div class="td" id="s-cover">
           <button [disabled]="isDisabled" (click)="validate(guess.value); guess.value=''">
             <div id="s-circle"></div>
@@ -26,11 +35,16 @@
       </div>
   </div>
   <div id="borderForboard">
-  <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p>
-  <p class='boardP'> Not possible: <input class="noteBoard" type="number" > </p>
-  <p class='boardP'> Should be: 	&nbsp;	&nbsp;  <input class="noteBoard" type="number"> </p>
-  <p style="margin-left: 1.5%;" class='boardP'> Certain:	&nbsp;	&nbsp;	&nbsp;	&nbsp;  <input class="noteBoard" type="number" > </p>
-
+    <!-- <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p> -->
+    <p style="color: black; font-weight: bolder; margin-top: -1px; "align="center">Not possible </p>
+      <p></p>
+    <button class="btn" (click)="onclick(color)"  [style.background-color] = " finalColor1[color]  ? '' : 'black'"  *ngFor="let color of colors1" >{{color}}</button>
+    </div>
+    <p></p>
+    <div  id="borderForboard" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+    <p style="color: #f85a5a; font-weight: bolder;" align="center"> Certain </p>
+    <p></p>
+    <button class="btn2" (click)="onclick1(color)"  [style.background-color] = " finalColor2[color]  ? '' : '#f85a5a'"  *ngFor="let color of colors2" cdkDrag>{{color}}</button>
 
   </div>
 

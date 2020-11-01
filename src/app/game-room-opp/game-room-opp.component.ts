@@ -15,6 +15,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { GameValidation } from '../api.services/game.validation.service';
 import { ScoreService } from '../api.services/gamer.score.service';
 import { browser } from 'protractor';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-game-room-opp',
@@ -56,6 +57,11 @@ export class GameRoomOppComponent implements OnInit {
   href;
   roomId;
   getNames;
+  colors1=['0','1','2','3','4','5','6','7','8','9'];
+  colors2=['0','1','2','3','4','5','6','7','8','9'];
+  finalColor1=[true, true, true, true, true, true, true, true, true, true];
+  finalColor2=[true, true, true, true, true, true, true, true, true, true];
+
 
 
 
@@ -162,27 +168,38 @@ export class GameRoomOppComponent implements OnInit {
           if( data['whoWon'].toString()=="1"){
             this.gameOver=true;
             this.whoWonGame=data['firstGamerId']
+            this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
+
          return  clearInterval(this.passToOpponent);
           }
            else if(data['whoWon'].toString()=="2"){
             this.gameOver=true;
             this.whoWonGame= data['secondGamerId']
+            this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
           return clearInterval(this.passToOpponent);
           }
              this.isDisabled=false;
              this.startTimer();
              this.numberGuessedForOponents.push({num:data['secondGamerGuess'].toString()});
+             this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
            return clearInterval(this.passToOpponent);
          }
         else if(this.loginName==data['firstGamerId'] && data['whoNext'].toString()=="2"){
           if( data['whoWon'].toString()=="1"){
             this.gameOver=true;
             this.whoWonGame=data['firstGamerId']
+            this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
          return  clearInterval(this.passToOpponent);
           }
            else if(data['whoWon'].toString()=="2"){
             this.gameOver=true;
             this.whoWonGame=data['secondGamerId']
+            this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
           return clearInterval(this.passToOpponent);
           }
             this.isDisabled=true;
@@ -193,11 +210,15 @@ export class GameRoomOppComponent implements OnInit {
           if( data['whoWon'].toString()=="1"){
             this.gameOver=true;
             this.whoWonGame=data['firstGamerId']
+            this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
          return  clearInterval(this.passToOpponent);
           }
            else if(data['whoWon'].toString()=="2"){
             this.gameOver=true;
             this.whoWonGame=data['secondGamerId']
+            this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
           return clearInterval(this.passToOpponent);
           }
            this.isDisabled=true;
@@ -208,11 +229,15 @@ export class GameRoomOppComponent implements OnInit {
           if( data['whoWon'].toString()=="1"){
             this.gameOver=true;
             this.whoWonGame=data['firstGamerId']
+            this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
          return  clearInterval(this.passToOpponent);
           }
            else if(data['whoWon'].toString()=="2"){
             this.gameOver=true;
             this.whoWonGame=data['secondGamerId']
+            this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+            this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
           return clearInterval(this.passToOpponent);
           }
            this.isDisabled=false;
@@ -258,6 +283,8 @@ export class GameRoomOppComponent implements OnInit {
      if(validate.toString()=="+++++"){
        this.gameOver=true;
        this.whoWonGame=this.loginName;
+       this.api.updateGamer(this.loginName,this.roomId,"","0").subscribe(data=>data);
+       this.api.updateGamer(this.oponentName,this.roomId,"","0").subscribe(data=>data);
        if(this.loginName== data['firstGamerId']){
        this.whoWonGamePOST="1";
        this.scoreApi.getOneUserScore(this.loginName.toString()).subscribe(scoredata => {
@@ -429,7 +456,27 @@ export class GameRoomOppComponent implements OnInit {
    }
 
 
+   onclick(color){
+    var num:number = color;
+    if(this.finalColor1[num]==false)
+       return this.finalColor1[color]=true;
+    else
+     return this.finalColor1[num]=false;
+  }
 
+  onclick1(color){
+  var num:number = color;
+    if(this.finalColor2[num]==false)
+       return this.finalColor2[color]=true;
+    else
+     return this.finalColor2[num]=false;
+
+
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.colors2, event.previousIndex, event.currentIndex);
+  }
 
 
 

@@ -19,6 +19,8 @@ import { ScoresComponent } from './scores/scores.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WaitRoomComponent } from './wait-room/wait-room.component';
 import { RoomsComponent } from './rooms/rooms.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 
@@ -43,6 +45,7 @@ import { RoomsComponent } from './rooms/rooms.component';
 
   imports: [
     BrowserModule,
+    DragDropModule,
     CountdownModule,
     AppRoutingModule,
     MatExpansionModule,

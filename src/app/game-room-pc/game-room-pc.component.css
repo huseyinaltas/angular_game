@@ -214,10 +214,13 @@ button span:before, button span:after
   border-style: dotted;
   border-color:  #ff7575;
   margin-left: 5.5%;
-  inline-size: 86%;
-  width: 84%;
-  padding-left: 2%;
-  padding-right: 2%;
+  inline-size: 84%;
+  width: 86%;
+  padding-left: 1%;
+  padding-right: 1%;
+  display: inline-block;
+
+
 
 
 }
@@ -318,3 +321,68 @@ input[type="tel"]:focus, input[type="password"]:focus,
 textarea:focus, select:focus {
   font-size: 18px;
 }
+
+
+.btn {
+  background-color:  white;
+  border: none;
+  color: #f25e43;
+  /* padding: 20px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 23px;
+  /* margin: 4px 2px; */
+  margin-right: 3px;
+  width: 27px;
+  height: 45px;
+  border-radius: 30%;
+  margin-top: -10px;
+  margin-bottom: 3px;
+  font-weight: bolder;
+  border-style: solid;
+  border-color: black;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.29);
+
+}
+
+.btn2 {
+  background-color:  white;
+  border: none;
+  color: black;
+  /* padding: 20px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 23px;
+  /* margin: 4px 2px; */
+  margin-right: 3px;
+  width: 27px;
+  height: 45px;
+  border-radius: 30%;
+  margin-top: -10px;
+  margin-bottom: 3px;
+  font-weight: bolder;
+  border-style: solid;
+  border-color: #f25e43;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.29);
+
+
+
+}
+/* .btn2:focus{
+  font-size: 38px;
+  width: 40px;
+  height: 40px;
+
+} */
+
+.btn2:active{
+  /* font-size: 50px;
+  width: 27px;
+  height: 110px;
+  display: inline; */
+
+}
+
+

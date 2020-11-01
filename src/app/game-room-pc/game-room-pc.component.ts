@@ -6,6 +6,7 @@ import { GameService } from '../api.services/game.room.service';
 import { GameValidation } from '../api.services/game.validation.service';
 import { ScoreService } from '../api.services/gamer.score.service';
 import { loginInfo } from '../loginInfo';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-game-room-pc',
@@ -20,6 +21,10 @@ export class GameRoomPcComponent implements OnInit {
   loginName: any;
   setNumToMe:any;
   oldScore:any;
+  colors1=['0','1','2','3','4','5','6','7','8','9'];
+  colors2=['0','1','2','3','4','5','6','7','8','9'];
+  finalColor1=[true, true, true, true, true, true, true, true, true, true];
+  finalColor2=[true, true, true, true, true, true, true, true, true, true];
 
   constructor(private scoreApi: ScoreService, private http: HttpClient, private router: Router, private api: GameService, private validation: GameValidation) { }
 
@@ -68,7 +73,7 @@ export class GameRoomPcComponent implements OnInit {
           });
 
 
-        
+
       }
         if(guess.length!=5 || data.toString().length>5){
           this.numberGuessedFromMe.push({num:"Enter 5 unique digits!", posneg:null});
@@ -82,7 +87,26 @@ export class GameRoomPcComponent implements OnInit {
   }
 
 
+onclick(color){
+  var num:number = color;
+  if(this.finalColor1[num]==false)
+     return this.finalColor1[color]=true;
+  else
+   return this.finalColor1[num]=false;
+}
+
+onclick1(color){
+var num:number = color;
+  if(this.finalColor2[num]==false)
+     return this.finalColor2[color]=true;
+  else
+   return this.finalColor2[num]=false;
 
 
+}
+
+drop(event: CdkDragDrop<string[]>) {
+  moveItemInArray(this.colors2, event.previousIndex, event.currentIndex);
+}
 
 }

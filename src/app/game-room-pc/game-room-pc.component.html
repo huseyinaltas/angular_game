@@ -9,7 +9,7 @@
   <div id="cover">
       <div class="tb">
         <div class="td">
-          <input id="validationBox" #guess type="tel" placeholder="Enter 5 digits!" required maxlength="5" size="5" >
+          <input id="validationBox" #guess type="tel" placeholder="Enter 5 digits!" required maxlength="5" size="5" (keyup.enter)="validate(guess.value);guess.value=''">
         </div>
         <div class="td" id="s-cover">
           <button type="submit" (click)="validate(guess.value); guess.value=''">
@@ -20,16 +20,20 @@
       </div>
   </div>
   <div id="borderForboard">
-  <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p>
-  <p>Not possible: <input id="noteBoard" type="tel"  > </p>
-  <p> Should be: 	&nbsp;	&nbsp;  <input id="noteBoard" type="tel"> </p>
-  <p> Certain:	&nbsp;	&nbsp;	&nbsp;	&nbsp;    <input id="noteBoard" type="tel" > </p>
-  <!-- <p>{{setNumToMe}}</p> -->
-
+  <!-- <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p> -->
+  <p style="color: black; font-weight: bolder; margin-top: -1px; "align="center">Not possible </p>
+    <p></p>
+  <button class="btn" (click)="onclick(color)"  [style.background-color] = " finalColor1[color]  ? '' : 'black'"  *ngFor="let color of colors1" >{{color}}</button>
   </div>
+  <p></p>
+  <div  id="borderForboard" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+  <p style="color: #f85a5a; font-weight: bolder;" align="center"> Certain </p>
+  <p></p>
+  <button class="btn2" (click)="onclick1(color)"  [style.background-color] = " finalColor2[color]  ? '' : '#f85a5a'"  *ngFor="let color of colors2" cdkDrag>{{color}}</button>
+
+</div>
 
   <div id="myGuesses">
-    <!-- #enddocregion basic-panel -->
     <mat-expansion-panel id="dropDown" (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false"
                          [expanded]="panelOpenState">
@@ -47,15 +51,7 @@
        <li *ngIf="guess.num !=''"><span style="color: #f25e43;">{{guess.num}}</span>  <span  id="guesses">{{guess.posneg}}</span></li>
       </ul>
     </mat-expansion-panel>
-
-    <!-- Copyright 2020 Google LLC. All Rights Reserved.
-        Use of this source code is governed by an MIT-style license that
-        can be found in the LICENSE file at http://angular.io/license -->
     </div>
-
-    <!-- Copyright 2020 Google LLC. All Rights Reserved.
-        Use of this source code is governed by an MIT-style license that
-        can be found in the LICENSE file at http://angular.io/license -->
 
 </div>
 </div>
