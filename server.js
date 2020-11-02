@@ -1,33 +1,11 @@
-
-
-//Install express server
 const express = require('express');
-const path = require('path');
 
 const app = express();
 
+app.use(express.static('./dist/game-number'));
 
+app.get('/*', (req, res) =>
+    res.sendFile('index.html', {root: 'dist/game-number/'}),
+);
 
-// const forceSSL = function() {
-//   return function (req, res, next) {
-//     if (req.headers['x-forwarded-proto'] !== 'https') {
-//       return res.redirect(
-//        ['https://', req.get('Host'), req.url].join('')
-//       );
-//     }
-//     next();
-//   }
-// }
-// // Instruct the app
-// // to use the forceSSL
-// // middleware
-// app.use(forceSSL());
-
-
-// Serve static files....
-app.use(express.static(__dirname + '/dist/game-number'));
 app.listen(process.env.PORT || 8080);
-
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/game-number/src/index.html'));
-});
