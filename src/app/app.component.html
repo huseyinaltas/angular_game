@@ -314,7 +314,7 @@
 <!-- <div class="header-container">
     <img src="/assets/image.png"  width=100% height=100px>
     </div> -->
-<div  class="toolbar" role="banner">
+<!-- <div  class="toolbar" role="banner">
   <span style="margin-left: 1%;"> <a routerLink='/home'> Home </a> </span>
   <span> <a routerLink='/aboutUs'> About</a> </span>
   <span > <a routerLink='/scores'> Scores</a> </span>
@@ -327,5 +327,85 @@
 <div class="content" role="main">
 <router-outlet></router-outlet>
 
+</div> -->
+
+<mat-toolbar color="primary" class="expanded-toolbar">
+  <span>
+    <!-- <button mat-button routerLink="/">{{title}}</button> -->
+    <button mat-button routerLink="/home">
+      <mat-icon>gamepad</mat-icon>
+      Play
+    </button>
+    <button mat-button routerLink="/scores">
+      <mat-icon>equalizer</mat-icon>
+      Scores
+    </button>
+  </span>
+<div fxLayout="row" fxShow="false" fxShow.gt-sm>
+  <button mat-button (click)="login()" *ngIf="!isAuthenticated">
+    <mat-icon>power_settings_new</mat-icon>
+    Login
+  </button>
+  <button mat-button *ngIf="isAuthenticated" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    Logout
+  </button>
+  <button mat-button routerLink="/profile" *ngIf="isAuthenticated">
+    <mat-icon>supervised_user_circle</mat-icon>
+    Profile
+  </button>
+  <button mat-button routerLink="/aboutUs">
+    <mat-icon>exposure</mat-icon>
+    About
+  </button>
 </div>
+<button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+  <mat-icon>menu</mat-icon>
+</button>
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+<button mat-menu-item routerLink="/profile" *ngIf="isAuthenticated">
+  <mat-icon>supervised_user_circle</mat-icon>
+  Profile
+</button>
+<button mat-menu-item (click)="login()" *ngIf="!isAuthenticated">
+  <mat-icon>power_settings_new</mat-icon>
+  Login
+</button>
+<button mat-menu-item *ngIf="isAuthenticated" (click)="logout()">
+  <mat-icon>exit_to_app</mat-icon>
+  Logout
+</button>
+<button mat-menu-item routerLink="/aboutUs">
+  <mat-icon>exposure</mat-icon>
+  About
+</button>
+</mat-menu>
+<div class="content" role="main" style="margin-top: 12px;">
+  <div *ngIf="auth.user$ | async as user">
+  <!-- id: {{user.sub}} -->
+  <div class="row" *ngIf="profileJson">
+    <!-- {{profileJson}} -->
+  </div>
+
+  <div class="button_cont" align="center" *ngIf="router.url === '/' && playShow">
+    <a class="example_b"  style="background-color: #f56666; font-size:25px;" (click)="router.navigateByUrl('/home')" target="_blank" rel="nofollow noopener">
+      Play
+    </a>
+  </div>
+
+</div>
+  <span *ngIf="register" style="color: red; font-size: 20px;">{{errorMessage}}</span>
+  <span *ngIf="register">
+    <input #loginName type="text" placeholder="User Name" class="form-control" (keyup.enter)="userName(loginName.value)">
+    <p></p>
+    <div style="padding-left: 25%; padding-top: 7%;">
+    <button (click)="userName(loginName.value);  loginName.value=''" style="font-size:20px; color: #f56666;">Create
+    </button>
+  </div>
+
+  </span>
+  <router-outlet *ngIf="!register"></router-outlet>
+
+  </div>
 

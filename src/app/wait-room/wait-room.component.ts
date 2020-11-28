@@ -56,6 +56,7 @@ export class WaitRoomComponent implements OnInit {
           if(count >=60){
           this.api.deleteARoom(this.roomId).subscribe(data => data);
           this.router.navigateByUrl("/home");
+          console.log("Wait room")
           clearInterval(this.gameReady)
 
           }

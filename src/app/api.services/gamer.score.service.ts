@@ -31,22 +31,44 @@ export class ScoreService {
   }
 
 
-  getOneUserScore(gamerid:string){
+  getOneUserScore(email:string){
 
-    return this.http.request('GET', 'http://192.168.86.98:8080/score/'+gamerid, {headers:this.headers,responseType:'json'});
+    return this.http.request('GET', 'http://192.168.86.98:8080/score/'+email, {headers:this.headers,responseType:'json'});
   }
 
 
-  updateAnUserScore(gamerid, score){
+  updateAnUserScore(email, score){
 
    const body = {
-    gamerid: gamerid,
+    gamerEmail: email,
     score: score
   }
 
 
-   return this.http.request('PUT', 'http://192.168.86.98:8080/score/'+gamerid, { headers:this.headers, body:body, responseType:'json'});
+   return this.http.request('PUT', 'http://192.168.86.98:8080/score/'+email, { headers:this.headers, body:body, responseType:'json'});
 
+
+  }
+  updateAnUsername(email, userName){
+
+   const body = {
+    gamerEmail: email,
+    gamerid: userName
+  }
+
+
+   return this.http.request('PUT', 'http://192.168.86.98:8080/score/username/'+email, { headers:this.headers, body:body, responseType:'json'});
+
+
+  }
+
+  createAnUser(email, userid){
+    const body = {
+      gamerEmail: email,
+      gamerid: userid,
+      score: "0"
+    }
+    return this.http.request('POST', 'http://192.168.86.98:8080/score/', { headers:this.headers, body:body, responseType:'json'});
 
   }
 

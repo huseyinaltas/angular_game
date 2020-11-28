@@ -20,6 +20,22 @@ import { ProfileComponent } from './profile/profile.component';
 import { WaitRoomComponent } from './wait-room/wait-room.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { AuthModule } from '@auth0/auth0-angular';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatOptionModule } from '@angular/material/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 
 
 
@@ -39,7 +55,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ScoresComponent,
     ProfileComponent,
     WaitRoomComponent,
-    RoomsComponent
+    RoomsComponent,
+
 
   ],
 
@@ -51,6 +68,23 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatExpansionModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTableModule,
+    MatDividerModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatProgressSpinnerModule,
+    AuthModule.forRoot({
+      domain: 'find-numbers.us.auth0.com',
+      clientId: 'Dt7iTAETxCePeYHFaANoQI4TY0DBdCgb'
+    }),
     RouterModule.forRoot([
         // { path: 'gameRoom/:room', component: GameRoomComponent },
         { path: 'aboutUs', component: AboutUsComponent },

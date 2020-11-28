@@ -19,7 +19,7 @@
 <div id="forOpp">
   My Number for {{oponentName}}: <span style="color: black;">{{setNumToOpponent}}</span>
   <!-- <h2 *ngIf="!isValid && gameReady && !isDisabled" ><countdown #countdown [config]="{leftTime: 60}"></countdown></h2> -->
-  <h2 *ngIf="!isValid && gameReady && !isDisabled" ><countdown #countdown [config]="{leftTime: 60}"></countdown></h2>
+  <h2  style="margin-top: 8px; margin-bottom: -2px;" *ngIf="!isValid && gameReady && !isDisabled" ><countdown  style="border: solid;border-radius: 30%; border-color: black; padding: 2px;" #countdown [config]="{leftTime: 60, format: 'ss'}"></countdown></h2>
   </div>
   <div id="cover">
       <div class="tb">
@@ -42,10 +42,9 @@
     </div>
     <p></p>
     <div  id="borderForboard" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
-    <p style="color: #f85a5a; font-weight: bolder;" align="center"> Certain </p>
+    <p style="color: #f85a5a; font-weight: bolder; margin-top: -1px;" align="center"> Certain </p>
     <p></p>
     <button class="btn2" (click)="onclick1(color)"  [style.background-color] = " finalColor2[color]  ? '' : '#f85a5a'"  *ngFor="let color of colors2" cdkDrag>{{color}}</button>
-
   </div>
 
   <div id="myGuesses" style="margin-top: 2%;">

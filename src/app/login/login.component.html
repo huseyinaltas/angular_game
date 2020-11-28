@@ -1,7 +1,24 @@
-<span>
+
+<div class="button_cont" align="left" *ngIf="guestLogin">
+  <a class="example_b"  style="background-color: #f56666; font-size:25px;" (click)="login()"  target="_blank" rel="nofollow noopener">
+    Login
+  </a>
+</div>
+<p></p>
+<div class="button_cont" align="right" *ngIf="guestLogin" (click)="guestLogin=false">
+  <a class="example_b"  style="background-color: #f56666; font-size:25px;"
+   target="_blank" rel="nofollow noopener">
+   Guest Login
+  </a>
+</div>
+
+<span style="padding-left: 7%;" *ngIf="!guestLogin">
   <input #loginName type="text" placeholder="User Name" class="form-control" (keyup.enter)="getUser(loginName.value)">
-  <button (click)="getUser(loginName.value);  loginName.value=''">Login to Game
+  <p></p>
+  <div style="padding-left: 28%;">
+  <button (click)="getUser(loginName.value);  loginName.value=''" style="font-size:20px; color: #f56666;">Login
   </button>
+</div>
 <div > At least 3 letters for user name</div>
 
 </span>

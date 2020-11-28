@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
 import { AppComponent } from '../app.component';
 import { loginInfo } from '../loginInfo';
 import { whichGame } from '../loginInfo';
@@ -16,9 +17,11 @@ userReady=false;
 loginError="";
 room=12345;
 checkoutForm;
+guestLogin = true;
 
 
-constructor(private router: Router, private http: HttpClient, private appcomp: AppComponent) {
+constructor(private router: Router, private http: HttpClient, private appcomp: AppComponent,
+   public auth: AuthService,) {
 
 }
 
@@ -54,6 +57,10 @@ if(this.userReady==true && login.length>2){
   }
     }
 
+  }
+
+  login() {
+    this.auth.loginWithRedirect();
   }
 
 

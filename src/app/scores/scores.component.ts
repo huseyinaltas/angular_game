@@ -21,7 +21,6 @@ export class ScoresComponent implements OnInit {
     // this.allScores.push(this.api.getAllScores());
     this.api.getAllScores().subscribe(data => this.allScores=data
       )
-      console.log(room[0]);
 
 
 

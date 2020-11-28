@@ -7,6 +7,8 @@ import { GameValidation } from '../api.services/game.validation.service';
 import { ScoreService } from '../api.services/gamer.score.service';
 import { loginInfo } from '../loginInfo';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { AuthService } from '@auth0/auth0-angular';
+
 
 @Component({
   selector: 'app-game-room-pc',
@@ -21,14 +23,22 @@ export class GameRoomPcComponent implements OnInit {
   loginName: any;
   setNumToMe:any;
   oldScore:any;
+  email;
   colors1=['0','1','2','3','4','5','6','7','8','9'];
   colors2=['0','1','2','3','4','5','6','7','8','9'];
   finalColor1=[true, true, true, true, true, true, true, true, true, true];
   finalColor2=[true, true, true, true, true, true, true, true, true, true];
 
-  constructor(private scoreApi: ScoreService, private http: HttpClient, private router: Router, private api: GameService, private validation: GameValidation) { }
+  constructor(private scoreApi: ScoreService, private http: HttpClient,
+     private router: Router, private api: GameService,
+      private validation: GameValidation, public auth: AuthService) {
+        this.auth.user$.subscribe(data => this.email = data.email+"_"+data.sub.charAt(0));
+       }
 
   ngOnInit(): void {
+
+    console.log("email: "+this.email);
+
     this.loginName = loginInfo[0];
     this.numberGuessedFromMe[0]={num:"",posneg:""};
     this.getRandomString();
@@ -67,9 +77,9 @@ export class GameRoomPcComponent implements OnInit {
       var data = this.validation.returnResult(this.setNumToMe, guess);
       if(data.toString()=="+++++"){
         this.gameOver=true;
-        this.scoreApi.getOneUserScore(this.loginName.toString()).subscribe(data => {
+        this.scoreApi.getOneUserScore(this.email).subscribe(data => {
           this.oldScore = data['score'];
-          this.scoreApi.updateAnUserScore(this.loginName, 100+Number(this.oldScore)).subscribe(data => data);
+          this.scoreApi.updateAnUserScore(this.email, 100+Number(this.oldScore)).subscribe(data => data);
           });
 
 

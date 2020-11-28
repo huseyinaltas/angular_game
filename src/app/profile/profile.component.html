@@ -1,1 +1,51 @@
-<p>profile works!</p>
+<!-- <div style=" margin-top: 25%; ">
+<div style=" "><img src=""></div>
+<p></p>
+
+
+        <label for="username">Username: </label>
+        <input type="text" formControlName="username" class="form-control" />
+        <button >
+          Change
+      </button>
+
+
+    <div>Email: </div>
+    <div>Score: </div>
+
+
+
+</div> -->
+
+<div class="container mt-5" *ngIf="auth.user$ | async as user">
+  <div
+    class="row align-items-center profile-header mb-5 text-center text-md-left"
+  >
+
+  </div>
+</div>
+
+
+<div class="wrapper"  *ngIf="auth.user$ | async as user">
+  <h1>Profile</h1>
+  <div >
+    <img
+    [src]="user.picture"
+    alt="Profile picture"
+    class="nav-user-profile rounded-circle"
+    style="width: 75px; border-radius: 50%; "
+  />
+  <span style="bottom: 12px;font-weight: bolder;"><span style="font-size: 16px; color: #f56666;">Score :</span>  <span style="font-size: 16px; color: #f56666;">{{score}}</span> </span>
+  <p></p>
+      <div><span style="bottom: 16px; font-weight: bolder;"><span style="font-size: 14px; color: #f56666;">Login Email :</span>  <span style="font-size: 14px; color: #f56666; font-weight: bolder ;font-family: monospace;">{{user.email}}</span></span></div>
+
+  </div>
+  <p></p>
+  <mat-form-field appearance="outline" >
+      <mat-label style="font-size: 20px; color: #f56666;">Username</mat-label>
+      <input matInput placeholder="Username" type="text" style="font-size: 25px;"
+          autocomplete="off" #usern [(value)]="userNameinUs" required/>
+  </mat-form-field>
+  <button mat-raised-button color="primary" style="background-color: #f56666;"
+   (click)="changeUserName(usern.value)" >Change Username</button>
+   <h2 *ngIf="changedUn" style="font-style: italic; color: lightsalmon;">{{userNameChangeMessage}}</h2>

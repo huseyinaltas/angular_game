@@ -1,4 +1,7 @@
-<ul *ngFor="let score of allScores">
-<li >{{score['gamerid']}}  :  {{score.score}}</li>
+<ul class="heroes" *ngFor="let score of allScores; index as i">
+  <li >
+    <span class="order">{{i+1}}</span>
+    <span class="badge">{{score['gamerid']}}</span> <span style="font-size: 16px;"> {{score.score}} </span>
 
-</ul>
+  </li>
+  </ul>
