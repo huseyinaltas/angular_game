@@ -27,13 +27,17 @@ export class ScoreService {
 
 
   getAllScores() {
-    return this.http.request('GET', 'http://192.168.86.98:8080/scoreTen', {headers:this.headers,responseType:'json'});
+  //   return this.http.request('GET', 'http://192.168.86.98:8080/scoreTen', {headers:this.headers,responseType:'json'});
+  // }
+    return this.http.request('GET', 'https://find-number-spring.herokuapp.com/scoreTen', {headers:this.headers,responseType:'json'});
   }
 
 
   getOneUserScore(email:string){
 
-    return this.http.request('GET', 'http://192.168.86.98:8080/score/'+email, {headers:this.headers,responseType:'json'});
+  //   return this.http.request('GET', 'http://192.168.86.98:8080/score/'+email, {headers:this.headers,responseType:'json'});
+  // }
+    return this.http.request('GET', 'https://find-number-spring.herokuapp.com/score/'+email, {headers:this.headers,responseType:'json'});
   }
 
 
@@ -45,7 +49,8 @@ export class ScoreService {
   }
 
 
-   return this.http.request('PUT', 'http://192.168.86.98:8080/score/'+email, { headers:this.headers, body:body, responseType:'json'});
+  //  return this.http.request('PUT', 'http://192.168.86.98:8080/score/'+email, { headers:this.headers, body:body, responseType:'json'});
+   return this.http.request('PUT', 'https://find-number-spring.herokuapp.com/score/'+email, { headers:this.headers, body:body, responseType:'json'});
 
 
   }
@@ -57,7 +62,8 @@ export class ScoreService {
   }
 
 
-   return this.http.request('PUT', 'http://192.168.86.98:8080/score/username/'+email, { headers:this.headers, body:body, responseType:'json'});
+  //  return this.http.request('PUT', 'http://192.168.86.98:8080/score/username/'+email, { headers:this.headers, body:body, responseType:'json'});
+   return this.http.request('PUT', 'https://find-number-spring.herokuapp.com/score/username/'+email, { headers:this.headers, body:body, responseType:'json'});
 
 
   }
@@ -68,7 +74,8 @@ export class ScoreService {
       gamerid: userid,
       score: "0"
     }
-    return this.http.request('POST', 'http://192.168.86.98:8080/score/', { headers:this.headers, body:body, responseType:'json'});
+    // return this.http.request('POST', 'http://192.168.86.98:8080/score/', { headers:this.headers, body:body, responseType:'json'});
+    return this.http.request('POST', 'https://find-number-spring.herokuapp.com/score/', { headers:this.headers, body:body, responseType:'json'});
 
   }
 

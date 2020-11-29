@@ -28,7 +28,8 @@ export class GameService {
 
 
   getRoomDetails(roomId) {
-    return this.http.request('GET', 'http://192.168.86.98:8080/gameroom/'+roomId, {headers:this.headers,responseType:'json'});
+    // return this.http.request('GET', 'http://192.168.86.98:8080/gameroom/'+roomId, {headers:this.headers,responseType:'json'});
+    return this.http.request('GET', 'https://find-number-spring.herokuapp.com/gameroom/'+roomId, {headers:this.headers,responseType:'json'});
   }
 
 
@@ -46,7 +47,8 @@ export class GameService {
       whoWon:whoWon,
       friend:friend
   }
-    return  this.http.request('PUT', 'http://192.168.86.98:8080/gameroom/'+roomId, { headers:this.headers, body:bodyl});
+    // return  this.http.request('PUT', 'http://192.168.86.98:8080/gameroom/'+roomId, { headers:this.headers, body:bodyl});
+    return  this.http.request('PUT', 'https://find-number-spring.herokuapp.com/gameroom/'+roomId, { headers:this.headers, body:bodyl});
   }
 
   validateNum(setNumToMe, guess){
@@ -55,7 +57,8 @@ export class GameService {
 
    const params = new HttpParams({fromString: 'guessNum='+guess});
 
-   return this.http.request('POST', 'http://192.168.86.98:8080/guess', {responseType:'text', headers:this.headers, params:params, body:body})
+  //  return this.http.request('POST', 'http://192.168.86.98:8080/guess', {responseType:'text', headers:this.headers, params:params, body:body})
+   return this.http.request('POST', 'https://find-number-spring.herokuapp.com/guess', {responseType:'text', headers:this.headers, params:params, body:body})
   }
 
 
@@ -67,18 +70,21 @@ export class GameService {
                   setnumto: setnumto,
                   ready: ready};
 
-   return this.http.request('PUT', 'http://192.168.86.98:8080/gamer/'+gamerid, {responseType:'text', headers:this.headers, body:body})
+  //  return this.http.request('PUT', 'http://192.168.86.98:8080/gamer/'+gamerid, {responseType:'text', headers:this.headers, body:body})
+   return this.http.request('PUT', 'https://find-number-spring.herokuapp.com/gamer/'+gamerid, {responseType:'text', headers:this.headers, body:body})
   }
 
 
   getGamerDetails(gamerid:string) {
-    return this.http.request('GET', 'http://192.168.86.98:8080/gamer/'+gamerid, {headers:this.headers,responseType:'json'});
+    // return this.http.request('GET', 'http://192.168.86.98:8080/gamer/'+gamerid, {headers:this.headers,responseType:'json'});
+    return this.http.request('GET', 'https://find-number-spring.herokuapp.com/gamer/'+gamerid, {headers:this.headers,responseType:'json'});
   }
 
 
 
   getAvailableRooms() {
-    return this.http.request('GET', 'http://192.168.86.98:8080/available/', {headers:this.headers,responseType:'json'});
+    // return this.http.request('GET', 'http://192.168.86.98:8080/available/', {headers:this.headers,responseType:'json'});
+    return this.http.request('GET', 'https://find-number-spring.herokuapp.com/available/', {headers:this.headers,responseType:'json'});
   }
 
 
@@ -96,7 +102,8 @@ export class GameService {
         whoWon:whoWon,
         friend:friend
     }
-      return  this.http.request('POST', 'http://192.168.86.98:8080/gameroom/', {responseType:'text', headers:this.headers, body:bodyl});
+      // return  this.http.request('POST', 'http://192.168.86.98:8080/gameroom/', {responseType:'text', headers:this.headers, body:bodyl});
+      return  this.http.request('POST', 'https://find-number-spring.herokuapp.com/gameroom/', {responseType:'text', headers:this.headers, body:bodyl});
     }
 
 
@@ -123,12 +130,14 @@ export class GameService {
     }
 
     deleteARoom(roomId) {
-      return this.http.request('DELETE', 'http://192.168.86.98:8080/gameroom/'+roomId, {responseType:'text', headers:this.headers,});
+      // return this.http.request('DELETE', 'http://192.168.86.98:8080/gameroom/'+roomId, {responseType:'text', headers:this.headers,});
+      return this.http.request('DELETE', 'https://find-number-spring.herokuapp.com/gameroom/'+roomId, {responseType:'text', headers:this.headers,});
     }
 
 
     delete5Minutes() {
-      return this.http.request('DELETE', 'http://192.168.86.98:8080/gameroom/deleteFiveMinutes/', {responseType:'text', headers:this.headers,});
+      // return this.http.request('DELETE', 'http://192.168.86.98:8080/gameroom/deleteFiveMinutes/', {responseType:'text', headers:this.headers,});
+      return this.http.request('DELETE', 'https://find-number-spring.herokuapp.com/gameroom/deleteFiveMinutes/', {responseType:'text', headers:this.headers,});
     }
 
 
