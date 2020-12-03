@@ -8,6 +8,7 @@ import { ScoreService } from '../api.services/gamer.score.service';
 import { loginInfo } from '../loginInfo';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { AuthService } from '@auth0/auth0-angular';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -30,12 +31,13 @@ export class GameRoomPcComponent implements OnInit {
   finalColor2=[true, true, true, true, true, true, true, true, true, true];
 
   constructor(private scoreApi: ScoreService, private http: HttpClient,
-     private router: Router, private api: GameService,
+     private router: Router, private api: GameService, public cookie:CookieService,
       private validation: GameValidation, public auth: AuthService) {
         this.auth.user$.subscribe(data => this.email = data.email+"_"+data.sub.charAt(0));
        }
 
   ngOnInit(): void {
+    this.cookie.set("url", this.router.url.substring(1))
 
     console.log("email: "+this.email);
 
@@ -43,6 +45,9 @@ export class GameRoomPcComponent implements OnInit {
     this.numberGuessedFromMe[0]={num:"",posneg:""};
     this.getRandomString();
 
+  }
+  reload(){
+    location.reload();
   }
 
   getRandomString() {

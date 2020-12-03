@@ -389,8 +389,8 @@
   </div>
 
   <div class="button_cont" align="center" *ngIf="router.url === '/' && playShow">
-    <a class="example_b"  style="background-color: #f56666; font-size:25px;" (click)="router.navigateByUrl('/home')" target="_blank" rel="nofollow noopener">
-      Play
+    <a class="example_b"  style="background-color: #f56666; font-size:25px;" (click)="router.navigateByUrl(cookie.get('url'))" target="_blank" rel="nofollow noopener">
+     <span class="nello">Play</span>
     </a>
   </div>
 
@@ -406,6 +406,5 @@
 
   </span>
   <router-outlet *ngIf="!register"></router-outlet>
-
   </div>
 

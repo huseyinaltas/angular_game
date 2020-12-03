@@ -20,7 +20,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { WaitRoomComponent } from './wait-room/wait-room.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthGuard, AuthModule } from '@auth0/auth0-angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,6 +34,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatOptionModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -96,6 +97,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         { path: 'profile', component: ProfileComponent },
         { path: 'wait', component: WaitRoomComponent },
         { path: 'rooms', component: RoomsComponent },
+
 
 
 

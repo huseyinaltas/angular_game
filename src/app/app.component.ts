@@ -7,6 +7,9 @@ import { AuthService } from '@auth0/auth0-angular';
 import { AuthServ } from './auth.service';
 import { ScoreService } from './api.services/gamer.score.service';
 import { getMaxListeners } from 'process';
+import { CookieService } from 'ngx-cookie-service';
+import { HtmlParser } from '@angular/compiler';
+import { htmlAstToRender3Ast } from '@angular/compiler/src/render3/r3_template_transform';
 
 @Component({
   selector: 'app-root',
@@ -27,13 +30,14 @@ export class AppComponent implements OnInit {
   token;
   profileJson;
   playShow = true;
-  
+
 
 
 
 
   constructor(private router: Router, private gamerRoomOpp: GameRoomOppComponent,
-    public authService: AuthServ, public auth: AuthService,  private api: ScoreService) {
+    public authService: AuthServ, public auth: AuthService,
+     private api: ScoreService, public cookie: CookieService) {
     this.isAuthenticated = this.auth.isAuthenticated$.subscribe(data => this.isAuthenticated = data);
     this.picture = this.auth.user$.subscribe(data => {
       this.picture = data.picture;
@@ -41,7 +45,6 @@ export class AppComponent implements OnInit {
 
 
     });
-
 
 
   }
@@ -60,7 +63,7 @@ export class AppComponent implements OnInit {
   // }
 
    ngOnInit() {
-    // this.router.navigateByUrl("/home");
+
     this.picture = this.auth.user$.subscribe(data => {
       this.emailInDB = data.email+"_"+data.sub.charAt(0);
         this.api.getOneUserScore(this.emailInDB).subscribe(score => {
@@ -73,16 +76,6 @@ export class AppComponent implements OnInit {
         }
         });
 
-    //   this.api.getOneUserScore(this.email).subscribe(score => {
-    //     loginInfo[0] = score['gamerid'];
-    //     this.gamerName = loginInfo[0];
-    //     console.log("Hello: "+this.gamerName)
-    //     if(this.gamerName==""){
-    //
-
-    //     }
-
-    //  });
 
     });
 
@@ -90,7 +83,28 @@ export class AppComponent implements OnInit {
       (profile) => (this.profileJson = JSON.stringify(profile, null, 2))
     );
 
-    // this.gamerName=loginInfo[0];
+    setTimeout(() => {
+      var elementExists = document.getElementsByClassName('nello');
+      this.auth.isAuthenticated$.subscribe(data => {
+        if(!data && this.router.url != ("/") && this.cookie.get("auth0.is.authenticated")=="true"){
+          this.login();
+        }
+        if(data){
+          this.router.navigateByUrl(this.cookie.get("url"))
+        }
+        else if(elementExists.length ==1){
+          this.router.navigateByUrl(this.cookie.get("url"))
+        }
+      })
+
+    }, 500);
+
+
+    // if(elementExists,,){
+    //   this.router.navigateByUrl("/home")
+
+    // }
+
   }
 
   logout() {
@@ -124,6 +138,8 @@ export class AppComponent implements OnInit {
     });
 
   }
+
+
 
 
 }

@@ -140,6 +140,10 @@ export class GameService {
       return this.http.request('DELETE', 'https://find-number-spring.herokuapp.com/gameroom/deleteFiveMinutes/', {responseType:'text', headers:this.headers,});
     }
 
+    delete1DayGamer() {
+      // return this.http.request('DELETE', 'http://192.168.86.98:8080/gamer/deleteOneDay', {responseType:'text', headers:this.headers,});
+      return this.http.request('DELETE', 'https://find-number-spring.herokuapp.com/gamer/deleteOneDay', {responseType:'text', headers:this.headers,});
+    }
 
 
 

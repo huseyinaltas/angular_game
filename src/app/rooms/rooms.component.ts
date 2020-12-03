@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { GameService } from '../api.services/game.room.service';
 import { loginInfo } from '../loginInfo';
 import { room } from '../loginInfo';
@@ -21,9 +22,10 @@ export class RoomsComponent implements OnInit {
   gameStarter;
   clickedJoin = false;
 
-  constructor(private api: GameService, private router: Router) { }
+  constructor(private api: GameService, private router: Router, public cookie: CookieService) { }
 
   ngOnInit(): void {
+    this.cookie.set("url", this.router.url.substring(1))
     this.myid = loginInfo[0];
     this.href =  this.router.url;
     this.api.delete5Minutes().subscribe((data) => data);

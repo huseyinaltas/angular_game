@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from '../app.component';
 import { loginInfo } from '../loginInfo';
 import { whichGame } from '../loginInfo';
@@ -21,12 +22,12 @@ guestLogin = true;
 
 
 constructor(private router: Router, private http: HttpClient, private appcomp: AppComponent,
-   public auth: AuthService,) {
+   public auth: AuthService, public cookie:CookieService,) {
 
 }
 
   ngOnInit() {
-
+    // this.cookie.set("url", this.router.url.substring(1))
 
   }
   getUser(login:string){

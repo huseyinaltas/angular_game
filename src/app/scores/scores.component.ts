@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { filter } from 'rxjs/operators';
 import { ScoreService } from '../api.services/gamer.score.service';
 import {room} from '../loginInfo'
@@ -14,7 +15,8 @@ export class ScoresComponent implements OnInit {
 
   allScores;
 
-  constructor(private http: HttpClient, private router: Router, private api: ScoreService) { }
+  constructor(private http: HttpClient, private router: Router,
+    public cookie:CookieService, private api: ScoreService) { }
 
 
   ngOnInit(): void {
@@ -22,7 +24,7 @@ export class ScoresComponent implements OnInit {
     this.api.getAllScores().subscribe(data => this.allScores=data
       )
 
-
+      this.cookie.set("url", this.router.url.substring(1))
 
   }
 

@@ -1,7 +1,8 @@
 <div *ngIf="gameOver">
 <span id="won">You WON! </span>
-<button class="button" routerLink='/home' >New Game</button>
-
+<button class="button" (click)="reload()" style="width: 70%; height: 70%; margin-bottom: -10%; margin-top: 5%; border-radius: 50%;" >New Game</button>
+<br><br><br><br>
+<button class="button" routerLink='/home' style="width: 70%; height: 70%; margin-top: -50%; border-radius: 50%;size: 50%;" >Home Page</button>
 </div>
 
 <div *ngIf="!gameOver">
