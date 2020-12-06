@@ -20,27 +20,37 @@
         </div>
       </div>
   </div>
-  <div id="borderForboard">
-  <!-- <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p> -->
-  <p style="color: black; font-weight: bolder; margin-top: -1px; "align="center">Not possible </p>
+  <mat-expansion-panel id="dropDown" (opened)="panelOpenStateForPossiblities = true"
+                         (closed)="panelOpenStateForPossiblities = false"
+                         [expanded]="panelOpenStateForPossiblities" style="border:dotted; border-color:#945247;">
+  <mat-expansion-panel-header>
+    <mat-panel-title >
+      <span style="margin-top: 2.5%; color: #945247; font-weight: bolder;"> Possibilities: </span>
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div id="borderForboard" style="margin-left: -7px; width: 102%;">
+    <!-- <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p> -->
+    <p style="color: black; font-weight: bolder; margin-top: -1px; "align="center">Not possible </p>
+      <p></p>
+    <button class="btn" (click)="onclick(color)"  [style.background-color] = " finalColor1[color]  ? '' : 'black'"  *ngFor="let color of colors1" >{{color}}</button>
+    </div>
     <p></p>
-  <button class="btn" (click)="onclick(color)"  [style.background-color] = " finalColor1[color]  ? '' : 'black'"  *ngFor="let color of colors1" >{{color}}</button>
+    <div  id="borderForboard" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)" style="margin-left: -7px; width: 102%;" >
+    <p style="color: #f85a5a; font-weight: bolder; margin-top: -1px;" align="center"> Certain </p>
+    <p></p>
+    <button class="btn2" (click)="onclick1(color)"  [style.background-color] = " finalColor2[color]  ? '' : '#f85a5a'"  *ngFor="let color of colors2" cdkDrag>{{color}}</button>
   </div>
-  <p></p>
-  <div  id="borderForboard" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
-  <p style="color: #f85a5a; font-weight: bolder; margin-top: -1px;" align="center"> Certain </p>
-  <p></p>
-  <button class="btn2" (click)="onclick1(color)"  [style.background-color] = " finalColor2[color]  ? '' : '#f85a5a'"  *ngFor="let color of colors2" cdkDrag>{{color}}</button>
-
-</div>
+</mat-expansion-panel>
 
   <div id="myGuesses">
     <mat-expansion-panel id="dropDown" (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false"
-                         [expanded]="panelOpenState">
+                         [expanded]="panelOpenState" style="border:solid; border-color:#f25e43;">
       <mat-expansion-panel-header>
         <mat-panel-title>
-         <span style="margin-top: 2.5%; color: #f25e43; font-weight: bolder;"> My last guess: </span>
+         <span style="margin-top: 2.5%; color: #f25e43; font-weight: bolder;"> My all guesses: </span>
         </mat-panel-title>
         <mat-panel-description>
           <span style="color: black; margin-top: 2%; margin-left: -10%;" >  {{numberGuessedFromMe[numberGuessedFromMe.length-1].num}} </span>
@@ -48,8 +58,9 @@
           {{panelOpenState ? '' : ''}}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ul *ngFor="let guess of numberGuessedFromMe">
-       <li *ngIf="guess.num !=''"><span style="color: #f25e43;">{{guess.num}}</span>  <span  id="guesses">{{guess.posneg}}</span></li>
+      <ul *ngFor="let guess of numberGuessedFromMe; let i = index;">
+       <li *ngIf="guess.num !=''">
+         <span style="color: #f25e43;">{{numberGuessedFromMe[numberGuessedFromMe.length-i].num}}</span>  <span  id="guesses">{{numberGuessedFromMe[numberGuessedFromMe.length-i].posneg}}</span></li>
       </ul>
     </mat-expansion-panel>
     </div>

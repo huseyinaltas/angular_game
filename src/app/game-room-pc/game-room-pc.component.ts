@@ -18,6 +18,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class GameRoomPcComponent implements OnInit {
   panelOpenState;
+  panelOpenStateForPossiblities;
   numberGuessedFromMe = [];
   isDisabled: boolean;
   gameOver: boolean;

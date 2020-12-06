@@ -198,7 +198,7 @@ button span:before, button span:after
 
 #forOpp{
   color:#ff7575;
-  font-size: 150%;
+  font-size: 100%;
   inline-size: initial;
   margin-left: 5%;
 
@@ -211,10 +211,11 @@ button span:before, button span:after
 }
 
 #borderForboard{
-  border-style: dotted;
+  /* border-style: dotted;
   border-color:  #ff7575;
   margin-left: 5%;
-  inline-size: 88%;
+  inline-size: 88%; */
+
 
 }
 

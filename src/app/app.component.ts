@@ -21,7 +21,7 @@ import { htmlAstToRender3Ast } from '@angular/compiler/src/render3/r3_template_t
 export class AppComponent implements OnInit {
   gamerName="";
   title = 'Find A Number';
-  isAuthenticated;
+  isAuthenticated = false;
   picture;
   email;
   emailInDB;
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private gamerRoomOpp: GameRoomOppComponent,
     public authService: AuthServ, public auth: AuthService,
      private api: ScoreService, public cookie: CookieService) {
-    this.isAuthenticated = this.auth.isAuthenticated$.subscribe(data => this.isAuthenticated = data);
+    this.auth.isAuthenticated$.subscribe(data => this.isAuthenticated = data);
     this.picture = this.auth.user$.subscribe(data => {
       this.picture = data.picture;
       this.email = data.email;
@@ -63,7 +63,6 @@ export class AppComponent implements OnInit {
   // }
 
    ngOnInit() {
-
     this.picture = this.auth.user$.subscribe(data => {
       this.emailInDB = data.email+"_"+data.sub.charAt(0);
         this.api.getOneUserScore(this.emailInDB).subscribe(score => {
@@ -86,10 +85,14 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       var elementExists = document.getElementsByClassName('nello');
       this.auth.isAuthenticated$.subscribe(data => {
-        if(!data && this.router.url != ("/") && this.cookie.get("auth0.is.authenticated")=="true"){
+        if(!data && this.cookie.get("auth0.is.authenticated")=="true"){
           this.login();
         }
-        if(data){
+        else if(!data && this.cookie.get("auth0.is.authenticated")!="true"){
+          if(this.router.url == "/")
+          this.router.navigateByUrl("/home")
+        }
+        else if(data){
           this.router.navigateByUrl(this.cookie.get("url"))
         }
         else if(elementExists.length ==1){

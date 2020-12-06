@@ -63,6 +63,7 @@ export class GameRoomOppComponent implements OnInit {
   finalColor1=[true, true, true, true, true, true, true, true, true, true];
   finalColor2=[true, true, true, true, true, true, true, true, true, true];
   email;
+  panelOpenStateForPossiblities;
 
 
 
@@ -390,8 +391,8 @@ export class GameRoomOppComponent implements OnInit {
       this.newGameClicked=true;
      var timeOut =  setTimeout(()=>{
       this.api.getRoomDetails(this.roomId).pipe(first()).subscribe(data =>{
-       this.api.updateGamer(this.loginName,"12345","12345","0").subscribe((data)=>data);
-       this.api.updateRoom(data['roomId'], data['firstGamerId'], data['secondGamerId'], "12345","12345","12345","12345","1","3", "0").subscribe((data)=>data);
+       this.api.updateGamer(this.loginName,"","","0").subscribe((data)=>data);
+       this.api.updateRoom(data['roomId'], data['firstGamerId'], data['secondGamerId'], "","","","","1","3", "0").subscribe((data)=>data);
        // this.router.navigateByUrl("/gameRoom/"+"12345");
        this.numberGuessedForMine = [];
        this.numberGuessedForOponents = [];

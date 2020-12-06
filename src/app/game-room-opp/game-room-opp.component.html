@@ -3,7 +3,7 @@
   <button *ngIf="!newGameClicked" class="button" (click)="playAgain()"> Play again with {{oponentName}}</button>
   <button *ngIf="newGameClicked" class="button2" (click)="playAgain()" [disabled]="newGameClicked"> Please Wait!</button>
   </div>
-  <h2 *ngIf="isValid" ><input id="setBox" #setGuess placeholder="Enter a 5 digits number" maxlength="5" type="number" >
+  <h2 *ngIf="isValid" ><input id="setBox" #setGuess placeholder="Enter 5 unique digits number" maxlength="5" type="tel" >
     <button class="greatButton" style="height: 30px;" (click)="setAnumber(setGuess.value); setGuess.value=''">Set a number for game</button>
     <h5 *ngIf="isMessageShow">{{messageForSetNum}}</h5>
     </h2>
@@ -17,10 +17,13 @@
   </div>
   <div *ngIf="!gameOver && !isValid && gameReady">
 <div id="forOpp">
-  My Number for {{oponentName}}: <span style="color: black;">{{setNumToOpponent}}</span>
+  {{oponentName}}'s number: <span style="color: black;">{{setNumToOpponent}}</span>
+  <br>
+  <span>{{oponentName}}'s guess: <span style="color: black;">{{numberGuessedForOponents[numberGuessedForOponents.length-1].num}}</span></span>
+
   <!-- <h2 *ngIf="!isValid && gameReady && !isDisabled" ><countdown #countdown [config]="{leftTime: 60}"></countdown></h2> -->
-  <h2  style="margin-top: 8px; margin-bottom: -2px;" *ngIf="!isValid && gameReady && !isDisabled" ><countdown  style="border: solid;border-radius: 30%; border-color: black; padding: 2px;" #countdown [config]="{leftTime: 60, format: 'ss'}"></countdown></h2>
-  </div>
+  <h3 align="center" style="margin-top: 8px; margin-bottom: -2px; font-size: 20px;" *ngIf="!isValid && gameReady && !isDisabled" ><countdown  style="border: solid;border-radius: 30%; border-color: black;  " #countdown [config]="{leftTime: 60, format: 'ss'}"></countdown></h3>
+</div>
   <div id="cover">
       <div class="tb">
         <div class="td">
@@ -34,35 +37,50 @@
         </div>
       </div>
   </div>
-  <div id="borderForboard">
+
+  <mat-expansion-panel id="dropDown" (opened)="panelOpenStateForPossiblities = true"
+                         (closed)="panelOpenStateForPossiblities = false"
+                         [expanded]="panelOpenStateForPossiblities" style="border:solid; border-color:#945247; margin-top: -5px;">
+  <mat-expansion-panel-header style="height: 26px;">
+    <mat-panel-title >
+      <span style="margin-top: 1.5%; color: #945247; font-weight: bolder;"> Possibilities: </span>
+    </mat-panel-title>
+     </mat-expansion-panel-header>
+    <mat-panel-description>
+    </mat-panel-description>
+
+  <div id="borderForboard" style="margin-left: -7px; width: 102%; margin-top: -1px;">
     <!-- <p style="color: #ff7575; border-color: lightpink; border-style: double; text-align: center;" >Note board:</p> -->
-    <p style="color: black; font-weight: bolder; margin-top: -1px; "align="center">Not possible </p>
+    <p style="color: black; font-weight: bolder; margin-top: -3px; "align="center">Not possible </p>
       <p></p>
     <button class="btn" (click)="onclick(color)"  [style.background-color] = " finalColor1[color]  ? '' : 'black'"  *ngFor="let color of colors1" >{{color}}</button>
     </div>
     <p></p>
-    <div  id="borderForboard" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
-    <p style="color: #f85a5a; font-weight: bolder; margin-top: -1px;" align="center"> Certain </p>
+    <div  id="borderForboard" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)" style="margin-left: -7px; width: 102%;  margin-top: -1px;" >
+    <p style="color: #f85a5a; font-weight: bolder; margin-top: -2px;" align="center"> Certain </p>
     <p></p>
     <button class="btn2" (click)="onclick1(color)"  [style.background-color] = " finalColor2[color]  ? '' : '#f85a5a'"  *ngFor="let color of colors2" cdkDrag>{{color}}</button>
   </div>
+</mat-expansion-panel>
+
 
   <div id="myGuesses" style="margin-top: 2%;">
     <!-- #enddocregion basic-panel -->
     <mat-expansion-panel class='panelMine' (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
+                         (closed)="panelOpenState = false" style="border:solid; border-color:#f7bfb5;">
+      <mat-expansion-panel-header style="height: 26px;">
         <mat-panel-title>
           <span style="margin-top: 2.5%; color: #f25e43; font-weight: bolder;">    My Guesses: </span>
         </mat-panel-title>
         <mat-panel-description>
           <span style="color: black; margin-top: 2%; margin-left: -10%;" >  {{numberGuessedForMine[numberGuessedForMine.length-1].num}} </span>
-          <span id="guesses2" *ngIf="numberGuessedForMine.length !=1 && numberGuessedForMine[numberGuessedForMine.length-1].posneg !=null"> {{numberGuessedForMine[numberGuessedForMine.length-1].posneg}}</span>
+          <span id="guesses2" *ngIf="numberGuessedForMine.length !=1 && numberGuessedForMine[numberGuessedForMine.length-1].posneg !=null && numberGuessedForMine[numberGuessedForMine.length-1].num != 'Time is up!'"> {{numberGuessedForMine[numberGuessedForMine.length-1].posneg}}</span>
           {{panelOpenState ? '' : ''}}
          </mat-panel-description>
       </mat-expansion-panel-header>
-      <ul *ngFor="let guess of numberGuessedForMine">
-        <li *ngIf="guess.num !=''"><span style="color: #f25e43;">{{guess.num}}</span>  <span  id="guesses">{{guess.posneg}}</span></li>
+      <ul *ngFor="let guess of numberGuessedForMine; let i = index;">
+        <li *ngIf="guess.num !=''">
+          <span style="color: #f25e43;">{{numberGuessedForMine[numberGuessedForMine.length-i].num}}</span>  <span id="guesses">{{numberGuessedForMine[numberGuessedForMine.length-i].posneg}}</span></li>
        </ul>
 
     </mat-expansion-panel>
@@ -72,8 +90,8 @@
         can be found in the LICENSE file at http://angular.io/license -->
     </div>
 
-  <div id="oppGuesses" style="margin-top: 2%;">
-    <!-- #enddocregion basic-panel -->
+ <!-- <div id="oppGuesses" style="margin-top: 2%;">
+     #enddocregion basic-panel
     <mat-expansion-panel class='panelOpp' (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
@@ -91,8 +109,8 @@
        </ul>
     </mat-expansion-panel>
 
-    <!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Copyright 2020 Google LLC. All Rights Reserved.
         Use of this source code is governed by an MIT-style license that
-        can be found in the LICENSE file at http://angular.io/license -->
-    </div>
+        can be found in the LICENSE file at http://angular.io/license
+    </div> -->
   </div>
