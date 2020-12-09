@@ -35,6 +35,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatOptionModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
+import { AboutGameComponent } from './about-game/about-game.component';
 
 
 
@@ -57,6 +58,7 @@ import { CookieService } from 'ngx-cookie-service';
     ProfileComponent,
     WaitRoomComponent,
     RoomsComponent,
+    AboutGameComponent,
 
 
   ],
@@ -97,6 +99,7 @@ import { CookieService } from 'ngx-cookie-service';
         { path: 'profile', component: ProfileComponent },
         { path: 'wait', component: WaitRoomComponent },
         { path: 'rooms', component: RoomsComponent },
+        { path: 'aboutGame', component: AboutGameComponent },
 
 
 

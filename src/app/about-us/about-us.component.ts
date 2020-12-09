@@ -15,4 +15,8 @@ export class AboutUsComponent implements OnInit {
     this.cookie.set("url", this.router.url.substring(1))
   }
 
+  openNewTap(link){
+    window.open(link);
+  }
+
 }

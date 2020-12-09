@@ -8,7 +8,6 @@ import { AuthServ } from './auth.service';
 import { ScoreService } from './api.services/gamer.score.service';
 import { getMaxListeners } from 'process';
 import { CookieService } from 'ngx-cookie-service';
-import { HtmlParser } from '@angular/compiler';
 import { htmlAstToRender3Ast } from '@angular/compiler/src/render3/r3_template_transform';
 
 @Component({
@@ -30,18 +29,20 @@ export class AppComponent implements OnInit {
   token;
   profileJson;
   playShow = true;
+  user;
 
 
 
 
 
-  constructor(private router: Router, private gamerRoomOpp: GameRoomOppComponent,
+  constructor(public router: Router, private gamerRoomOpp: GameRoomOppComponent,
     public authService: AuthServ, public auth: AuthService,
      private api: ScoreService, public cookie: CookieService) {
     this.auth.isAuthenticated$.subscribe(data => this.isAuthenticated = data);
     this.picture = this.auth.user$.subscribe(data => {
       this.picture = data.picture;
       this.email = data.email;
+      this.user = data.email;
 
 
     });
@@ -140,6 +141,10 @@ export class AppComponent implements OnInit {
       });
     });
 
+  }
+
+  openNewTap(link){
+    window.open(link);
   }
 
 

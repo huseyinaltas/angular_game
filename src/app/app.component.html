@@ -230,16 +230,15 @@
   }
 
   footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
+  position: relative;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  border-top: solid #f56666;;
+  border-bottom: solid #f56666;;
 
-  footer a {
-    display: flex;
-    align-items: center;
-  }
+  text-align: center;
+}
 
   .github-star-badge {
     color: #24292e;
@@ -354,7 +353,7 @@
     <mat-icon>supervised_user_circle</mat-icon>
     Profile
   </button>
-  <button mat-button routerLink="/aboutUs">
+  <button mat-button routerLink="/aboutGame">
     <mat-icon>exposure</mat-icon>
     About
   </button>
@@ -376,19 +375,30 @@
   <mat-icon>exit_to_app</mat-icon>
   Logout
 </button>
-<button mat-menu-item routerLink="/aboutUs">
+<button mat-menu-item routerLink="/aboutGame">
   <mat-icon>exposure</mat-icon>
   About
 </button>
 </mat-menu>
 <div class="content" role="main" style="margin-top: 12px;">
-  <div *ngIf="auth.user$ | async as user">
+  <div *ngIf="!user && router.url == ''">
   <!-- id: {{user.sub}} -->
   <div class="row" *ngIf="profileJson">
     <!-- {{profileJson}} -->
   </div>
 
-  <div class="button_cont" align="center" *ngIf="router.url === '/' && playShow">
+  <div class="button_cont" align="center" >
+   <h2 style="color:#f56666;">
+    Find the 5 unique digits!
+   <br>
+   This game will be enchanting relaxing in sure. Luck and thinking will be key point in this game.
+   <br>
+   Guess the 5 digits number and find correct one. - and + will guide you for finding correct number.
+   <br>
+   - means : You found number but it is in wrong place in 5 digits.
+   <br>
+   + means : You found number and it's place also correct.
+  </h2>
     <a class="example_b"  style="background-color: #f56666; font-size:25px;" (click)="router.navigateByUrl(cookie.get('url'))" target="_blank" rel="nofollow noopener">
      <span class="nello">Play</span>
     </a>
@@ -408,3 +418,32 @@
   <router-outlet *ngIf="!register"></router-outlet>
   </div>
 
+
+
+  <footer *ngIf="router.url == '/home' || router.url == '/aboutUs' || router.url == '/profile' || router.url == '/scores'"
+  class="social" align="center" style="display: inline-block" >
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!--Facebook-->
+<a style="width: 40px; height: 30px; color:#f56666; font-size: 30px; cursor: pointer;" (click)="openNewTap('https://www.facebook.com/Find-Numbers-105127294799275')" class="fa fa-facebook"></a>
+<a style="width: 40px; height: 30px; color:#f56666; font-size: 30px; cursor: pointer;" (click)="openNewTap('https://twitter.com/NumbersFind')" class="fa fa-twitter"></a>
+<a style="width: 40px; height: 30px; color:#f56666; font-size: 30px; cursor: pointer;" (click)="openNewTap('https://www.instagram.com/gamefindnumbers/')" class="fa fa-instagram"></a>
+<a style="color:#f56666; font-size: 16px;" class="navigation" routerLink="aboutGame">&nbsp;|About Game |</a>
+<a style="color:#f56666; font-size: 16px;" class="navigation" routerLink="aboutUs">&nbsp;About Us|</a>
+
+  </footer >
+
+  <div align='center' *ngIf="router.url=='/home' || router.url == '/scores'">
+    <h2 style="color:#f56666;">
+     Game Time!
+      <br>
+      Find the 5 unique digits!
+     <br>
+     This game will be enchanting relaxing in sure. Luck and thinking will be key point in this game.
+     <br>
+     Guess the 5 digits number and find correct one. - and + will guide you for finding correct number.
+     <br>
+     - means : You found number but it is in wrong place in 5 digits.
+     <br>
+     + means : You found number and it's place also correct.
+    </h2>
+    </div>
