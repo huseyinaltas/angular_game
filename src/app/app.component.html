@@ -420,7 +420,7 @@
 
 
 
-  <footer *ngIf="router.url == '/home' || router.url == '/aboutUs' || router.url == '/profile' || router.url == '/scores'"
+  <footer *ngIf="router.url == '/home'  || router.url == '/scores'"
   class="social" align="center" style="display: inline-block" >
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <!--Facebook-->
@@ -433,7 +433,7 @@
   </footer >
 
   <div align='center' *ngIf="router.url=='/home' || router.url == '/scores'">
-    <h2 style="color:#f56666;">
+    <h5 style="color:#f56666;">
      Game Time!
       <br>
       Find the 5 unique digits!
@@ -445,5 +445,5 @@
      - means : You found number but it is in wrong place in 5 digits.
      <br>
      + means : You found number and it's place also correct.
-    </h2>
+    </h5>
     </div>

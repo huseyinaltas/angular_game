@@ -12,4 +12,8 @@ export class AboutGameComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openNewTap(link){
+    window.open(link);
+  }
+
 }
