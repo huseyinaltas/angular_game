@@ -380,6 +380,8 @@
   About
 </button>
 </mat-menu>
+
+
 <div class="content" role="main" style="margin-top: 12px;">
   <div *ngIf="!user && router.url == ''">
   <!-- id: {{user.sub}} -->
@@ -419,16 +421,19 @@
   </div>
 
 
-
+  <!-- <div align="center"  *ngIf="router.url=='/home' || router.url == '/scores'">
+    <img style="width: 32px; height: 32px; border-radius: 50%;" src="../assets/logo.png" >
+    </div> -->
+    <br>
   <footer *ngIf="router.url == '/home'  || router.url == '/scores'"
   class="social" align="center" style="display: inline-block" >
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <!--Facebook-->
-<a style="width: 40px; height: 30px; color:#f56666; font-size: 30px; cursor: pointer;" (click)="openNewTap('https://www.facebook.com/Find-Numbers-105127294799275')" class="fa fa-facebook"></a>
+<a style="width: 40px; height: 30px; color:#f56666; font-size: 30px; cursor: pointer;" (click)="openNewTap('https://www.facebook.com/groups/371999007415590')" class="fa fa-facebook"></a>
 <a style="width: 40px; height: 30px; color:#f56666; font-size: 30px; cursor: pointer;" (click)="openNewTap('https://twitter.com/NumbersFind')" class="fa fa-twitter"></a>
 <a style="width: 40px; height: 30px; color:#f56666; font-size: 30px; cursor: pointer;" (click)="openNewTap('https://www.instagram.com/gamefindnumbers/')" class="fa fa-instagram"></a>
-<a style="color:#f56666; font-size: 16px;" class="navigation" routerLink="aboutGame">&nbsp;|About Game |</a>
-<a style="color:#f56666; font-size: 16px;" class="navigation" routerLink="aboutUs">&nbsp;About Us|</a>
+<a style="color:#f56666; font-size: 16px;" class="navigation" routerLink="aboutGame">&nbsp;| About Game |</a>
+<a style="color:#f56666; font-size: 16px;" class="navigation" routerLink="aboutUs">&nbsp;About Us |</a>
 
   </footer >
 
