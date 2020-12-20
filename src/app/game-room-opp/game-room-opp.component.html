@@ -3,9 +3,10 @@
   <button *ngIf="!newGameClicked" class="button" (click)="playAgain()"> Play again with {{oponentName}}</button>
   <button *ngIf="newGameClicked" class="button2" (click)="playAgain()" [disabled]="newGameClicked"> Please Wait!</button>
   </div>
-  <h2 *ngIf="isValid" ><input id="setBox" #setGuess placeholder="Enter 5 unique digits number" maxlength="5" type="tel" >
-    <button class="greatButton" style="height: 30px;" (click)="setAnumber(setGuess.value); setGuess.value=''">Set a number for game</button>
-    <h5 *ngIf="isMessageShow">{{messageForSetNum}}</h5>
+  <h2 *ngIf="isValid" >
+    <input id="setBox" #setGuess placeholder="Set 5 unique digits!" maxlength="5" type="tel" style="" >
+    <button  class="greatButton" style="height: 30px;" (click)="setAnumber(setGuess.value); setGuess.value=''">Start</button>
+    <h6 style="color: #f25e43; font-weight: bolder;" *ngIf="isMessageShow">{{messageForSetNum}}</h6>
     </h2>
     <div *ngIf="!gameReady && !isValid">
     <div class="content">

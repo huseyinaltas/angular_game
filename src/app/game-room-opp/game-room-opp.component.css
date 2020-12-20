@@ -36,6 +36,11 @@ body
     margin: 0;
     border: 0;
     background-color: transparent;
+    caret-color: white;
+}
+#validationBox::placeholder, button
+{
+    color: #e0dbdb;
 }
 
 #cover
@@ -47,11 +52,17 @@ body
     left: 25%;
     /* padding: 0; */
     /* margin: -83px auto 0 auto; */
-    background-color: #ff7575;
+    background-color: #ff7c7c;
     border-radius: 20px;
     box-shadow: 0 10px 40px #ff7c7c, 0 0 0 20px #ffffffeb;
     transform: scale(0.6);
 
+
+}
+
+#cover::placeholder
+{
+  color: #e4a6a6;
 }
 
 
@@ -68,9 +79,14 @@ body
 
 input[type="tel"]::placeholder
 {
-    color: wheat;
+    color: rgb(231, 165, 145);
     font-size: 35px;
     padding-left: 5%;
+}
+
+input[type="tel"]
+{
+    border-radius: 20%;
 }
 
 #s-cover
@@ -358,9 +374,10 @@ input[type=number]::-webkit-outer-spin-button {
   /* padding: 15px 32px;s */
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
-  width: 100%;
-  margin-top: 5px;
+  font-size: 25px;
+  width: 50%;
+  margin-top: 15px;
+  margin-left: 27%;
   border-radius: 10%;
 
 }
@@ -368,12 +385,15 @@ input[type=number]::-webkit-outer-spin-button {
 
 #setBox{
   margin-top: 50px;
-  width: 75%;
-  border-color: #f25e43;
-  height: 50px;
+  width: 59%;
+  height: 36px;
+  border-color: #f16040;
   font-size: 100%;
-  margin-left: 9%;
+  display: inline-block;
+  margin-left: 20%;
   text-align: center;
+  /* background-color: #f3c9c9; */
+
 
 
 
@@ -382,6 +402,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #setBox::placeholder{
   font-size: 70%;
+  /* color: rgba(223, 149, 149, 0.795); */
 }
 
 

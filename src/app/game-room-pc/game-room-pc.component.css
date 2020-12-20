@@ -39,6 +39,11 @@ body
     caret-color: white;
 }
 
+#validationBox::placeholder, button
+{
+    color: #e0dbdb;
+}
+
 #cover
 {
     margin: auto;
