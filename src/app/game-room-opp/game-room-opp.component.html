@@ -4,7 +4,7 @@
   <button *ngIf="newGameClicked" class="button2" (click)="playAgain()" [disabled]="newGameClicked"> Please Wait!</button>
   </div>
   <h2 *ngIf="isValid" >
-    <input id="setBox" #setGuess placeholder="Set 5 unique digits!" maxlength="5" type="tel" style="" >
+    <input autocomplete="off" id="setBox" #setGuess placeholder="Set 5 unique digits!" maxlength="5" type="tel" style="" >
     <button  class="greatButton" style="height: 30px;" (click)="setAnumber(setGuess.value); setGuess.value=''">Start</button>
     <h6 style="color: #f25e43; font-weight: bolder;" *ngIf="isMessageShow">{{messageForSetNum}}</h6>
     </h2>
@@ -28,7 +28,7 @@
   <div id="cover">
       <div class="tb">
         <div class="td">
-          <input id="validationBox" #guess type="tel" placeholder="Enter 5 digits!" required maxlength="5" size="5" (keyup.enter)="validate(guess.value);guess.value=''">
+          <input autocomplete="off" id="validationBox" #guess type="tel" placeholder="Enter 5 digits!" required maxlength="5" size="5" (keyup.enter)="validate(guess.value);guess.value=''">
         </div>
         <div class="td" id="s-cover">
           <button [disabled]="isDisabled" (click)="validate(guess.value); guess.value=''">

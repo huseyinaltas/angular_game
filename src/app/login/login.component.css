@@ -280,6 +280,8 @@ body {
    padding-left: 30px;
    width: 120px;
    height: 25px;
+   display: inline-block;
+
   /* font-size: 17px;
   width: 40%;
   height: 25px;

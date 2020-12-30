@@ -10,7 +10,7 @@
   <div id="cover">
       <div class="tb">
         <div class="td">
-          <input id="validationBox" #guess type="tel" placeholder="Enter 5 digits!" required maxlength="5" size="5" (keyup.enter)="validate(guess.value);guess.value=''">
+          <input autocomplete="off" id="validationBox" #guess type="tel" placeholder="Enter 5 digits!" required maxlength="5" size="5" (keyup.enter)="validate(guess.value);guess.value=''">
         </div>
         <div class="td" id="s-cover">
           <button type="submit" (click)="validate(guess.value); guess.value=''">
@@ -22,8 +22,8 @@
   </div>
   <mat-expansion-panel id="dropDown" (opened)="panelOpenStateForPossiblities = true"
                          (closed)="panelOpenStateForPossiblities = false"
-                         [expanded]="panelOpenStateForPossiblities" style="border:dotted; border-color:#945247;">
-  <mat-expansion-panel-header>
+                         [expanded]="panelOpenStateForPossiblities" style="border:dotted; border-color:#945247; margin-bottom: -8px;">
+  <mat-expansion-panel-header style="height: 26px; ">
     <mat-panel-title >
       <span style="margin-top: 2.5%; color: #945247; font-weight: bolder;"> Possibilities: </span>
     </mat-panel-title>
@@ -44,13 +44,13 @@
   </div>
 </mat-expansion-panel>
 
-  <div id="myGuesses">
+  <div id="myGuesses" >
     <mat-expansion-panel id="dropDown" (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false"
-                         [expanded]="panelOpenState" style="border:solid; border-color:#f25e43;">
-      <mat-expansion-panel-header>
+                         [expanded]="panelOpenState" style="border:solid; border-color:#f09d8e; border-radius: 10%;">
+      <mat-expansion-panel-header style="height: 26px;">
         <mat-panel-title>
-         <span style="margin-top: 2.5%; color: #f25e43; font-weight: bolder;"> My all guesses: </span>
+         <span style="margin-top: 1%; color: #f25e43; font-weight: bolder;"> My all guesses: </span>
         </mat-panel-title>
         <mat-panel-description>
           <span style="color: black; margin-top: 2%; margin-left: -10%;" >  {{numberGuessedFromMe[numberGuessedFromMe.length-1].num}} </span>

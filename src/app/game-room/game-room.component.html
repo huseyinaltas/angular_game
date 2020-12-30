@@ -22,7 +22,7 @@
 <div class="column" style="background-color:turquoise;">
   <h2 *ngIf="!isValid && gameReady && !isDisabled" ><countdown #countdown [config]="{leftTime: 60}"></countdown></h2>
   <h2>My Number for {{oponentName}}'s guess</h2>
-      <h2 *ngIf="isValid" ><input #setGuess placeholder="Enter a 5 digits number" style="height: 40px; font-size: large; text-align: center;" maxlength="5" >
+      <h2 *ngIf="isValid" ><input autocomplete="off" #setGuess placeholder="Enter unique 5 digits" style="height: 40px; font-size: large; text-align: center;" maxlength="5" >
       <button  style="height: 30px;" (click)="setAnumber(setGuess.value); setGuess.value=''">Set and start game</button>
       <h5 *ngIf="isMessageShow">{{messageForSetNum}}</h5>
     </h2>

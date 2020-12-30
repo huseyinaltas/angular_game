@@ -12,10 +12,12 @@
   </a>
 </div>
 
-<span style="padding-left: 7%;" *ngIf="!guestLogin">
+<span *ngIf="!guestLogin">
+  <div align="center">
   <input #loginName type="text" placeholder="User Name" class="form-control" (keyup.enter)="getUser(loginName.value)">
+  </div>
   <p></p>
-  <div style="padding-left: 28%;">
+  <div align="center">
   <button (click)="getUser(loginName.value);  loginName.value=''" style="font-size:20px; color: #f56666;">Login
   </button>
 </div>

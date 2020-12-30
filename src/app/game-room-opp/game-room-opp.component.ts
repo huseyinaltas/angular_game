@@ -435,7 +435,7 @@ export class GameRoomOppComponent implements OnInit {
 
    if (guess) {
     this.api.getRoomDetails(this.roomId).pipe(first()).subscribe(data =>{
-     this.numberGuessedForMine.push({num:guess, posneg:""});
+    //  this.numberGuessedForMine.push({num:guess, posneg:""});
      var lastIndexOfOppGuessed= this.numberGuessedForOponents[this.numberGuessedForOponents.length-1].num;
      if(this.loginName==data['firstGamerId']){
       //  console.log("Hello");
