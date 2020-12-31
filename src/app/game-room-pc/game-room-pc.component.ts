@@ -35,6 +35,8 @@ export class GameRoomPcComponent implements OnInit {
      private router: Router, private api: GameService, public cookie:CookieService,
       private validation: GameValidation, public auth: AuthService) {
         this.auth.user$.subscribe(data => this.email = data.email+"_"+data.sub.charAt(0));
+        this.api.updateCount().subscribe(data => data);
+
        }
 
   ngOnInit(): void {

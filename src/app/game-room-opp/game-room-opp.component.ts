@@ -74,10 +74,10 @@ export class GameRoomOppComponent implements OnInit {
   constructor(private scoreApi: ScoreService, private http: HttpClient, private router: Router,
     private api: GameService, private validation: GameValidation, public auth: AuthService) {
       this.auth.user$.subscribe(data => this.email = data.email+"_"+data.sub.charAt(0));
+      this.api.updateCount().subscribe(data => data);
     }
-
    ngOnInit() {
-    console.log("email: "+this.email);
+    // console.log("email: "+this.email);
    this.href =  this.router.url;
    this.callNumber=0;
    this.roomId = room[0];

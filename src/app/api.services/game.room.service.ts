@@ -87,6 +87,11 @@ export class GameService {
     return this.http.request('GET', 'https://find-number-spring.herokuapp.com/available/', {headers:this.headers,responseType:'json'});
   }
 
+  updateCount() {
+    // return this.http.request('GET', 'http://192.168.86.98:8080/available/', {headers:this.headers,responseType:'json'});
+    return this.http.request('POST', 'https://find-number-spring.herokuapp.com/count', {headers:this.headers,responseType:'json'});
+  }
+
 
   createRoom(roomId,firstGamerId,secondGamerId,firstGamerNumberSetNum,secondGamerNumberSetNum,firstGamerGuess,secondGamerGuess,
     whoNext, whoWon, friend){
