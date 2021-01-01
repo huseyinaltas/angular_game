@@ -74,8 +74,8 @@ export class GameRoomOppComponent implements OnInit {
   constructor(private scoreApi: ScoreService, private http: HttpClient, private router: Router,
     private api: GameService, private validation: GameValidation, public auth: AuthService) {
       this.auth.user$.subscribe(data => this.email = data.email+"_"+data.sub.charAt(0));
-      this.api.updateCount().subscribe(data => data);
     }
+
    ngOnInit() {
     // console.log("email: "+this.email);
    this.href =  this.router.url;
@@ -356,6 +356,7 @@ export class GameRoomOppComponent implements OnInit {
    }
 
      setAnumber(num:any){
+      this.api.updateCount().subscribe(data => data);
        if((Number(num))>0){
          var i=0;
          var k=0;
